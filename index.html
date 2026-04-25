@@ -1056,10 +1056,11 @@
     </button>
     <input type="file" id="photo-input" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoSelect(event)">
 
-    <button class="barcode-btn" onclick="openBarcodeScanner()">
+    <button class="barcode-btn" onclick="document.getElementById('barcode-photo-input').click()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="2" height="12"/><rect x="7" y="6" width="1" height="12"/><rect x="10" y="6" width="3" height="12"/><rect x="15" y="6" width="1" height="12"/><rect x="18" y="6" width="3" height="12"/></svg>
       Scanner un code-barres
     </button>
+    <input type="file" id="barcode-photo-input" accept="image/*" capture="environment" style="display:none" onchange="handleBarcodePhoto(event)">
 
     <div id="meal-list" class="meal-list"></div>
   </div>
@@ -1522,12 +1523,13 @@
     <div id="barcode-error" style="display:none; text-align:center; padding:20px">
       <div style="font-size:40px; margin-bottom:10px">😕</div>
       <div style="font-weight:700; margin-bottom:6px" id="barcode-error-title">Produit non trouvé</div>
-      <div style="font-size:13px; color:var(--text-muted); font-weight:600; margin-bottom:18px; line-height:1.5" id="barcode-error-msg">
+      <div style="font-size:13px; color:var(--text-muted); font-weight:600; margin-bottom:18px; line-height:1.5; white-space:pre-wrap" id="barcode-error-msg">
         Ce produit n'est pas dans la base OpenFoodFacts. Tu peux entrer les calories manuellement avec le bouton "+".
       </div>
-      <div style="display:flex; gap:10px">
-        <button class="btn btn-secondary" onclick="closeBarcodeModal()" style="flex:1">Fermer</button>
-        <button class="btn btn-primary" onclick="retryBarcode()" style="flex:1">↺ Réessayer</button>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <button class="btn btn-primary" onclick="retryBarcode()">📷 Reprendre une photo</button>
+        <button class="btn btn-secondary" onclick="switchToManualFromError()">⌨️ Saisie manuelle</button>
+        <button class="btn btn-secondary" onclick="closeBarcodeModal()">Fermer</button>
       </div>
     </div>
   </div>
@@ -2840,7 +2842,156 @@ function resetData() {
 // ─── BARCODE SCANNER (capture photo + ZXing - compatible iOS Safari) ─────────
 let currentProduct = null;
 
-// Variables globales scanner
+// ─── BARCODE SCANNER (capture photo + ZXing - compatible iOS Safari) ─────────
+let currentProduct = null;
+
+// Nouvelle approche : utilise la caméra native iOS via input[type=file]
+async function handleBarcodePhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  event.target.value = ''; // reset pour pouvoir reprendre la même photo
+
+  // Vérifier ZXing
+  if (typeof ZXing === 'undefined' && typeof ZXingBrowser === 'undefined') {
+    showToast('Librairie de scan non chargée');
+    return;
+  }
+
+  // Ouvrir la modale en mode "loading" direct
+  document.getElementById('scanner-container').style.display = 'none';
+  document.getElementById('barcode-manual-fallback').style.display = 'none';
+  document.getElementById('barcode-result').style.display = 'none';
+  document.getElementById('barcode-error').style.display = 'none';
+  document.getElementById('barcode-loading').style.display = 'block';
+  document.getElementById('barcode-subtitle').textContent = 'Analyse de la photo...';
+  document.getElementById('barcode-modal').classList.add('show');
+
+  try {
+    // Charger l'image dans un canvas
+    const img = await loadImageFromFile(file);
+    const canvas = document.createElement('canvas');
+    // Limiter la taille pour des perfs raisonnables, sans trop dégrader
+    const maxDim = 1600;
+    let { width, height } = img;
+    if (width > maxDim || height > maxDim) {
+      if (width > height) {
+        height = Math.round(height * (maxDim / width));
+        width = maxDim;
+      } else {
+        width = Math.round(width * (maxDim / height));
+        height = maxDim;
+      }
+    }
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, width, height);
+
+    // Préparer ZXing
+    const ZX = window.ZXing || window.ZXingBrowser;
+    const hints = new Map();
+    const formats = [
+      ZX.BarcodeFormat.EAN_13,
+      ZX.BarcodeFormat.EAN_8,
+      ZX.BarcodeFormat.UPC_A,
+      ZX.BarcodeFormat.UPC_E,
+      ZX.BarcodeFormat.CODE_128,
+      ZX.BarcodeFormat.CODE_39,
+      ZX.BarcodeFormat.ITF,
+      ZX.BarcodeFormat.CODABAR
+    ];
+    hints.set(ZX.DecodeHintType.POSSIBLE_FORMATS, formats);
+    hints.set(ZX.DecodeHintType.TRY_HARDER, true);
+    hints.set(ZX.DecodeHintType.ALSO_INVERTED, true);
+    const reader = new ZX.BrowserMultiFormatReader(hints);
+
+    let result = null;
+
+    // Essai 1 : image normale
+    try {
+      result = await reader.decodeFromCanvas(canvas);
+    } catch(e) {}
+
+    // Essai 2 : recadrage zone centrale + agrandissement
+    if (!result) {
+      const cropCanvas = document.createElement('canvas');
+      const cropW = Math.floor(canvas.width * 0.9);
+      const cropH = Math.floor(canvas.height * 0.6);
+      const cropX = Math.floor((canvas.width - cropW) / 2);
+      const cropY = Math.floor((canvas.height - cropH) / 2);
+      cropCanvas.width = cropW * 2;
+      cropCanvas.height = cropH * 2;
+      const cropCtx = cropCanvas.getContext('2d');
+      cropCtx.imageSmoothingEnabled = false;
+      cropCtx.drawImage(canvas, cropX, cropY, cropW, cropH, 0, 0, cropW * 2, cropH * 2);
+      try {
+        result = await reader.decodeFromCanvas(cropCanvas);
+      } catch(e) {}
+    }
+
+    // Essai 3 : version contrastée noir & blanc
+    if (!result) {
+      const bwCanvas = document.createElement('canvas');
+      bwCanvas.width = canvas.width;
+      bwCanvas.height = canvas.height;
+      const bwCtx = bwCanvas.getContext('2d');
+      bwCtx.drawImage(canvas, 0, 0);
+      const imgData = bwCtx.getImageData(0, 0, bwCanvas.width, bwCanvas.height);
+      const d = imgData.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const avg = (d[i] + d[i+1] + d[i+2]) / 3;
+        const v = avg < 128 ? 0 : 255;
+        d[i] = v; d[i+1] = v; d[i+2] = v;
+      }
+      bwCtx.putImageData(imgData, 0, 0);
+      try {
+        result = await reader.decodeFromCanvas(bwCanvas);
+      } catch(e) {}
+    }
+
+    // Essai 4 : image entière en grand (×1.5)
+    if (!result) {
+      const bigCanvas = document.createElement('canvas');
+      bigCanvas.width = canvas.width * 1.5;
+      bigCanvas.height = canvas.height * 1.5;
+      const bigCtx = bigCanvas.getContext('2d');
+      bigCtx.imageSmoothingEnabled = false;
+      bigCtx.drawImage(canvas, 0, 0, bigCanvas.width, bigCanvas.height);
+      try {
+        result = await reader.decodeFromCanvas(bigCanvas);
+      } catch(e) {}
+    }
+
+    document.getElementById('barcode-loading').style.display = 'none';
+
+    if (result) {
+      const code = result.getText();
+      if (navigator.vibrate) navigator.vibrate(100);
+      await searchOpenFoodFacts(code);
+    } else {
+      showBarcodeError('Code-barres non lisible', 'Essaie de :\n• Te rapprocher du code (10-15 cm)\n• Améliorer la lumière\n• Cadrer bien droit\n\nOu utilise la saisie manuelle avec le bouton ↻ ci-dessous.');
+    }
+  } catch(e) {
+    document.getElementById('barcode-loading').style.display = 'none';
+    showBarcodeError('Erreur', 'Impossible d\'analyser l\'image : ' + e.message);
+  }
+}
+
+function loadImageFromFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// Ancien système (gardé en backup pour la saisie manuelle)
 let scannerStream = null;
 
 async function openBarcodeScanner() {
@@ -3027,6 +3178,11 @@ function switchToManual() {
   showManualFallback('Tape les chiffres du code-barres');
 }
 
+function switchToManualFromError() {
+  document.getElementById('barcode-error').style.display = 'none';
+  showManualFallback('Tape les chiffres du code-barres');
+}
+
 function stopBarcodeScan() {
   if (zxingControls) {
     try { zxingControls.stop(); } catch(e) {}
@@ -3201,7 +3357,7 @@ function showBarcodeError(title, msg) {
 
 function retryBarcode() {
   closeBarcodeModal();
-  setTimeout(() => openBarcodeScanner(), 300);
+  setTimeout(() => document.getElementById('barcode-photo-input').click(), 300);
 }
 
 function showToast(msg) {
