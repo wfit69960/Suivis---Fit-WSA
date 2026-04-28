@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Logo Wfit - Final</title>
+<style>
+  body {
+    background: #f7f8fa;
+    font-family: 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 30px 20px;
+    color: #1a2332;
+  }
+  h1 { text-align: center; font-size: 26px; margin-bottom: 8px; }
+  .subtitle { text-align: center; color: #8a93a3; margin-bottom: 30px; font-size: 14px; }
+  .logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .logo-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .logo-card h2 {
+    font-size: 17px;
+    margin: 0 0 4px 0;
+    font-weight: 700;
+  }
+  .logo-card .desc {
+    font-size: 12px;
+    color: #8a93a3;
+    margin-bottom: 18px;
+  }
+  .logo-display {
+    background: #f1f3f6;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo-display svg {
+    width: 180px;
+    height: 180px;
+    border-radius: 40px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .sizes-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .sizes-row svg.small { width: 60px; height: 60px; border-radius: 13px; }
+  .sizes-row svg.tiny { width: 38px; height: 38px; border-radius: 8px; }
+  .sizes-label { font-size: 11px; color: #8a93a3; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<h1>🎨 Logo Wfit — Version finale</h1>
+<div class="subtitle">W stylisé + "fit" en dessous · 3 variantes typographiques</div>
+
+<div class="logos">
+
+  <!-- VARIANTE A : fit fin et serré, élégant -->
+  <div class="logo-card">
+    <h2>Variante A — Élégante</h2>
+    <div class="desc">"fit" fin avec espacement large, sobre</div>
+    <div class="logo-display">
+      <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bgA" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00e573"/>
+            <stop offset="50%" stop-color="#00c264"/>
+            <stop offset="100%" stop-color="#00945c"/>
+          </linearGradient>
+          <linearGradient id="wA" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#e8fff0"/>
+          </linearGradient>
+        </defs>
+        <rect width="180" height="180" rx="40" fill="url(#bgA)"/>
+        <circle cx="40" cy="40" r="6" fill="white" opacity="0.4"/>
+        <circle cx="150" cy="48" r="3" fill="white" opacity="0.3"/>
+        <circle cx="148" cy="138" r="5" fill="white" opacity="0.35"/>
+        <!-- W -->
+        <path d="M 42 48 L 60 110 L 75 65 L 90 110 L 105 65 L 120 110 L 138 48"
+              stroke="url(#wA)" stroke-width="13" fill="none"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- "fit" en dessous, fin et espacé -->
+        <text x="90" y="148" text-anchor="middle"
+              font-family="Helvetica, Arial, sans-serif"
+              font-weight="500"
+              font-size="26"
+              fill="white"
+              letter-spacing="6">fit</text>
+      </svg>
+    </div>
+    <div class="sizes-row">
+      <div>
+        <svg class="small" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="180" height="180" rx="40" fill="url(#bgA)"/>
+          <path d="M 42 48 L 60 110 L 75 65 L 90 110 L 105 65 L 120 110 L 138 48" stroke="white" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="90" y="148" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="500" font-size="26" fill="white" letter-spacing="6">fit</text>
+        </svg>
+        <div class="sizes-label">60×60</div>
+      </div>
+      <div>
+        <svg class="tiny" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="180" height="180" rx="40" fill="url(#bgA)"/>
+          <path d="M 42 48 L 60 110 L 75 65 L 90 110 L 105 65 L 120 110 L 138 48" stroke="white" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="90" y="148" text-anchor="middle" font-family="Helvetica" font-weight="500" font-size="26" fill="white" letter-spacing="6">fit</text>
+        </svg>
+        <div class="sizes-label">38×38</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VARIANTE B : fit gras et bold -->
+  <div class="logo-card">
+    <h2>Variante B — Punchy</h2>
+    <div class="desc">"fit" en gras épais, plus impactant</div>
+    <div class="logo-display">
+      <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bgB" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00e573"/>
+            <stop offset="50%" stop-color="#00c264"/>
+            <stop offset="100%" stop-color="#00945c"/>
+          </linearGradient>
+        </defs>
+        <rect width="180" height="180" rx="40" fill="url(#bgB)"/>
+        <circle cx="40" cy="40" r="6" fill="white" opacity="0.4"/>
+        <circle cx="150" cy="48" r="3" fill="white" opacity="0.3"/>
+        <circle cx="148" cy="138" r="5" fill="white" opacity="0.35"/>
+        <!-- W -->
+        <path d="M 42 45 L 60 105 L 75 62 L 90 105 L 105 62 L 120 105 L 138 45"
+              stroke="white" stroke-width="13" fill="none"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- "fit" gras et serré -->
+        <text x="90" y="150" text-anchor="middle"
+              font-family="Helvetica, Arial, sans-serif"
+              font-weight="900"
+              font-size="34"
+              fill="white"
+              letter-spacing="-1">fit</text>
+      </svg>
+    </div>
+    <div class="sizes-row">
+      <div>
+        <svg class="small" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="180" height="180" rx="40" fill="url(#bgB)"/>
+          <path d="M 42 45 L 60 105 L 75 62 L 90 105 L 105 62 L 120 105 L 138 45" stroke="white" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="90" y="150" text-anchor="middle" font-family="Helvetica" font-weight="900" font-size="34" fill="white" letter-spacing="-1">fit</text>
+        </svg>
+        <div class="sizes-label">60×60</div>
+      </div>
+      <div>
+        <svg class="tiny" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="180" height="180" rx="40" fill="url(#bgB)"/>
+          <path d="M 42 45 L 60 105 L 75 62 L 90 105 L 105 62 L 120 105 L 138 45" stroke="white" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="90" y="150" text-anchor="middle" font-family="Helvetica" font-weight="900" font-size="34" fill="white" letter-spacing="-1">fit</text>
+        </svg>
+        <div class="sizes-label">38×38</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VARIANTE C : fit avec point coloré (touche fun) -->
+  <div class="logo-card">
+    <h2>Variante C — Fun</h2>
+    <div class="desc">"fit" avec point jaune sur le i (touche fun)</div>
+    <div class="logo-display">
+      <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bgC" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00e573"/>
+            <stop offset="50%" stop-color="#00c264"/>
+            <stop offset="100%" stop-color="#00945c"/>
+          </linearGradient>
+        </defs>
+        <rect width="180" height="180" rx="40" fill="url(#bgC)"/>
+        <circle cx="40" cy="40" r="6" fill="white" opacity="0.4"/>
+        <circle cx="150" cy="48" r="3" fill="white" opacity="0.3"/>
+        <circle cx="148" cy="138" r="5" fill="white" opacity="0.35"/>
+        <!-- W -->
+        <path d="M 42 45 L 60 105 L 75 62 L 90 105 L 105 62 L 120 105 L 138 45"
+              stroke="white" stroke-width="13" fill="none"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- "fit" en bas avec point jaune -->
+        <text x="90" y="150" text-anchor="middle"
+              font-family="Helvetica, Arial, sans-serif"
+              font-weight="800"
+              font-size="32"
+              fill="white"
+              letter-spacing="0">f<tspan fill="#ffe066">i</tspan>t</text>
+      </svg>
+    </div>
+    <div class="sizes-row">
+      <div>
+        <svg class="small" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="180" height="180" rx="40" fill="url(#bgC)"/>
+          <path d="M 42 45 L 60 105 L 75 62 L 90 105 L 105 62 L 120 105 L 138 45" stroke="white" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="90" y="150" text-anchor="middle" font-family="Helvetica" font-weight="800" font-size="32" fill="white">f<tspan fill="#ffe066">i</tspan>t</text>
+        </svg>
+        <div class="sizes-label">60×60</div>
+      </div>
+      <div>
+        <svg class="tiny" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="180" height="180" rx="40" fill="url(#bgC)"/>
+          <path d="M 42 45 L 60 105 L 75 62 L 90 105 L 105 62 L 120 105 L 138 45" stroke="white" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="90" y="150" text-anchor="middle" font-family="Helvetica" font-weight="800" font-size="32" fill="white">f<tspan fill="#ffe066">i</tspan>t</text>
+        </svg>
+        <div class="sizes-label">38×38</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center; margin-top:40px; padding:20px; max-width:600px; margin-left:auto; margin-right:auto; background:white; border-radius:14px; box-shadow:0 2px 12px rgba(0,0,0,0.04)">
+  <p style="font-size:13px; color:#8a93a3; line-height:1.6; margin:0">
+    💡 Dis-moi laquelle tu préfères et je l'intègre dans ton app à la place de l'ananas !
+  </p>
+</div>
+
+</body>
+</html>
