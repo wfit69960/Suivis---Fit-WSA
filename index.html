@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Mon Coach">
-<meta name="theme-color" content="#ffffff">
-<title>Mon Coach Minceur</title>
+<meta name="apple-mobile-web-app-title" content="Wfit">
+<meta name="theme-color" content="#00c264">
+<link rel="apple-touch-icon" href="wfit-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="wfit-icon.png">
+<link rel="icon" type="image/png" href="wfit-icon.png">
+<title>Wfit - Coach nutrition</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.0/umd/index.min.js"></script>
@@ -573,6 +576,87 @@
     vertical-align: middle;
   }
 
+
+  /* Daily nutrition summary */
+  .nutrition-card {
+    background: linear-gradient(180deg, #ffffff 0%, #fbfffd 100%);
+    border: 1px solid rgba(0,194,100,0.08);
+  }
+  .nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .nutrition-cell {
+    background: var(--surface2);
+    border-radius: 16px;
+    padding: 12px 8px;
+    text-align: center;
+    min-width: 0;
+  }
+  .nutrition-cell.highlight { background: var(--primary-light); }
+  .nutrition-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+  }
+  .nutrition-value {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+    margin-top: 7px;
+  }
+  .nutrition-cell.highlight .nutrition-value { color: var(--primary-dark); }
+  .nutrition-unit {
+    font-size: 10px;
+    color: var(--text-light);
+    font-weight: 800;
+    margin-top: 3px;
+  }
+  .nutrition-note {
+    margin-top: 12px;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+  }
+  .meal-macros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+  }
+  .meal-macros span {
+    background: rgba(0,194,100,0.09);
+    color: var(--primary-dark);
+    border-radius: 99px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 900;
+  }
+  .calendar-day.none {
+    background: #fff;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .calendar-day.future {
+    color: var(--text-light);
+    background: #fff;
+    border: 1px dashed var(--border);
+  }
+  .calendar-legend-dot.empty {
+    background: #fff;
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 360px) {
+    .nutrition-grid { grid-template-columns: repeat(2, 1fr); }
+  }
   /* Photo button */
   .photo-btn {
     background: linear-gradient(135deg, #a87cff, #6f54d8);
@@ -954,12 +1038,193 @@
   .modal-bg.centered {
     align-items: center;
   }
+
+
+  /* Wfit logo + food preset menu */
+  .wfit-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .wfit-logo-mark {
+    width: 58px;
+    height: 58px;
+    border-radius: 19px;
+    background: linear-gradient(145deg, #071d2d 0%, #063d36 48%, #00c264 100%);
+    box-shadow: 0 14px 30px rgba(0, 95, 67, 0.24), inset 0 1px 0 rgba(255,255,255,0.34);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  .wfit-logo-mark::before {
+    content: '';
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    right: -12px;
+    top: -12px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 50%;
+  }
+  .wfit-logo-mark::after {
+    content: '';
+    position: absolute;
+    width: 74px;
+    height: 74px;
+    left: -34px;
+    bottom: -34px;
+    background: rgba(0,229,115,0.28);
+    border-radius: 50%;
+  }
+  .wfit-logo-mark svg {
+    width: 45px;
+    height: 45px;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 5px 8px rgba(0,0,0,0.16));
+  }
+  .wfit-brand-name {
+    font-size: 27px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+  }
+  .wfit-brand-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 900;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .food-preset {
+    margin-top: 12px;
+    padding: 14px;
+    border: 1px solid rgba(0,194,100,0.12);
+    background: linear-gradient(180deg, #fbfffd 0%, #ffffff 100%);
+    border-radius: 18px;
+  }
+  .food-preset-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .food-preset-title {
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--text);
+  }
+  .food-preset-sub {
+    font-size: 10px;
+    color: var(--primary-dark);
+    background: var(--primary-light);
+    border-radius: 99px;
+    padding: 4px 8px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+  .food-preset-row {
+    display: grid;
+    grid-template-columns: 1fr 90px;
+    gap: 8px;
+  }
+  .food-preset-row select,
+  .food-preset-row input {
+    width: 100%;
+    min-width: 0;
+    background: var(--surface2);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    padding: 12px 11px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    outline: none;
+  }
+  .food-preset-row select:focus,
+  .food-preset-row input:focus {
+    border-color: var(--primary);
+    background: var(--surface);
+  }
+  .food-preset-row input { text-align: center; }
+  .food-preset-calc {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .food-preset-chip {
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 8px 6px;
+    text-align: center;
+    min-width: 0;
+  }
+  .food-preset-chip.main { background: var(--primary-light); }
+  .food-preset-chip b {
+    display: block;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .food-preset-chip.main b { color: var(--primary-dark); }
+  .food-preset-chip span {
+    display: block;
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .food-preset-add {
+    width: 100%;
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--primary), #00e573);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    box-shadow: 0 8px 18px rgba(0,194,100,0.22);
+    cursor: pointer;
+  }
+  .food-preset-add:active { transform: scale(0.98); }
+  @media (max-width: 380px) {
+    .food-preset-row { grid-template-columns: 1fr 76px; }
+    .food-preset-calc { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
 </style>
 </head>
 <body>
 
 <div id="page-home" class="page active">
   <div class="header">
+    <div class="wfit-brand-row">
+      <div class="wfit-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 20l8 27 12-25 12 25 8-27" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M39 13c7-7 15-5 18 1-2 8-8 13-18 12" fill="white" fill-opacity="0.96"/>
+          <path d="M42 23c5-3 9-6 12-10" stroke="#00a854" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M16 49h10l5-10 6 15 6-9h7" stroke="white" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+        </svg>
+      </div>
+      <div>
+        <div class="wfit-brand-name">Wfit</div>
+        <div class="wfit-brand-sub">Coach nutrition</div>
+      </div>
+    </div>
     <div class="header-greeting" id="home-greeting">Bonjour 👋</div>
     <h1 id="home-title">Aujourd'hui</h1>
   </div>
@@ -992,6 +1257,7 @@
       <div class="calendar-legend">
         <span><span class="calendar-legend-dot" style="background:var(--primary)"></span>Objectif tenu</span>
         <span><span class="calendar-legend-dot" style="background:var(--danger)"></span>Dépassement</span>
+        <span><span class="calendar-legend-dot empty"></span>Vierge</span>
       </div>
     </div>
   </div>
@@ -1050,6 +1316,24 @@
       <button onclick="addCustomCal()">+</button>
     </div>
 
+    <div class="food-preset">
+      <div class="food-preset-head">
+        <div class="food-preset-title">Ajouter un aliment</div>
+        <div class="food-preset-sub">type FatSecret</div>
+      </div>
+      <div class="food-preset-row">
+        <select id="food-preset-select" onchange="selectFoodPreset()" aria-label="Aliment"></select>
+        <input type="number" id="food-preset-qty" value="100" min="1" inputmode="decimal" oninput="updateFoodPresetCalc()" aria-label="Quantité">
+      </div>
+      <div class="food-preset-calc" id="food-preset-calc">
+        <div class="food-preset-chip main"><b>0</b><span>kcal</span></div>
+        <div class="food-preset-chip"><b>0g</b><span>prot</span></div>
+        <div class="food-preset-chip"><b>0g</b><span>gluc</span></div>
+        <div class="food-preset-chip"><b>0g</b><span>lip</span></div>
+      </div>
+      <button class="food-preset-add" onclick="addSelectedFood()">Ajouter au journal</button>
+    </div>
+
     <button class="photo-btn" onclick="document.getElementById('photo-input').click()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
       Analyser une photo de mon repas
@@ -1064,6 +1348,48 @@
     <div id="meal-list" class="meal-list"></div>
   </div>
 
+
+  <div class="card nutrition-card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Nutriments du jour</div>
+        <div class="card-subtitle">Total des repas renseignés</div>
+      </div>
+    </div>
+    <div class="nutrition-grid">
+      <div class="nutrition-cell highlight">
+        <div class="nutrition-label">Calories</div>
+        <div class="nutrition-value" id="nutri-kcal">0</div>
+        <div class="nutrition-unit">kcal</div>
+      </div>
+      <div class="nutrition-cell">
+        <div class="nutrition-label">Protéines</div>
+        <div class="nutrition-value" id="nutri-protein">0</div>
+        <div class="nutrition-unit">g</div>
+      </div>
+      <div class="nutrition-cell">
+        <div class="nutrition-label">Glucides</div>
+        <div class="nutrition-value" id="nutri-carbs">0</div>
+        <div class="nutrition-unit">g</div>
+      </div>
+      <div class="nutrition-cell">
+        <div class="nutrition-label">Lipides</div>
+        <div class="nutrition-value" id="nutri-fats">0</div>
+        <div class="nutrition-unit">g</div>
+      </div>
+      <div class="nutrition-cell">
+        <div class="nutrition-label">Sucres</div>
+        <div class="nutrition-value" id="nutri-sugar">0</div>
+        <div class="nutrition-unit">g</div>
+      </div>
+      <div class="nutrition-cell">
+        <div class="nutrition-label">Fibres</div>
+        <div class="nutrition-value" id="nutri-fiber">0</div>
+        <div class="nutrition-unit">g</div>
+      </div>
+    </div>
+    <div class="nutrition-note" id="nutri-note">Les ajouts rapides comptent les calories. Les nutriments se remplissent avec les scans produits et les analyses photo.</div>
+  </div>
   <!-- Activité du jour : pas ou pilates -->
   <div class="card steps-card">
     <div class="card-head">
@@ -1584,6 +1910,7 @@ function init() {
     state.calViewMonth = todayKey().slice(0, 7);
   }
   loadSettingsUI();
+  initFoodPresets();
   updateAll();
 }
 
@@ -1603,6 +1930,7 @@ function updateAll() {
   updateGreeting();
   updateCaloriesRing();
   updateMealList();
+  updateDailyNutrition();
   updateActivityMode();
   updateSteps();
   updatePilates();
@@ -1793,9 +2121,220 @@ function showPage(id, btn) {
   window.scrollTo(0, 0);
 }
 
+function numberOrZero(value) {
+  const n = parseFloat(value);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function roundMacro(value) {
+  return Math.round((numberOrZero(value) + Number.EPSILON) * 10) / 10;
+}
+
+function firstMacroValue(...values) {
+  for (const value of values) {
+    const n = parseFloat(value);
+    if (Number.isFinite(n)) return n;
+  }
+  return 0;
+}
+
+function getMealMacros(meal = {}) {
+  const m = meal.macros || {};
+  return {
+    protein: roundMacro(firstMacroValue(m.protein, m.proteins, meal.protein, meal.proteins)),
+    carbs: roundMacro(firstMacroValue(m.carbs, m.carbohydrates, meal.carbs, meal.carbohydrates)),
+    fats: roundMacro(firstMacroValue(m.fats, m.fat, meal.fats, meal.fat)),
+    sugar: roundMacro(firstMacroValue(m.sugar, m.sugars, meal.sugar, meal.sugars)),
+    fiber: roundMacro(firstMacroValue(m.fiber, m.fibers, meal.fiber, meal.fibers))
+  };
+}
+
+function getDayNutrition(dateKey = todayKey()) {
+  const meals = state.calorieEntries[dateKey] || [];
+  const totals = { calories: 0, protein: 0, carbs: 0, fats: 0, sugar: 0, fiber: 0, meals: meals.length, macroMeals: 0 };
+  meals.forEach(meal => {
+    totals.calories += numberOrZero(meal.cal);
+    const macros = getMealMacros(meal);
+    const hasMacros = macros.protein || macros.carbs || macros.fats || macros.sugar || macros.fiber;
+    if (hasMacros) totals.macroMeals++;
+    totals.protein += macros.protein;
+    totals.carbs += macros.carbs;
+    totals.fats += macros.fats;
+    totals.sugar += macros.sugar;
+    totals.fiber += macros.fiber;
+  });
+  return totals;
+}
+
+function formatMacro(value) {
+  return roundMacro(value).toLocaleString('fr-FR', { maximumFractionDigits: 1 });
+}
+
+function updateDailyNutrition() {
+  const kcalEl = document.getElementById('nutri-kcal');
+  if (!kcalEl) return;
+  const n = getDayNutrition();
+  kcalEl.textContent = Math.round(n.calories).toLocaleString('fr-FR');
+  document.getElementById('nutri-protein').textContent = formatMacro(n.protein);
+  document.getElementById('nutri-carbs').textContent = formatMacro(n.carbs);
+  document.getElementById('nutri-fats').textContent = formatMacro(n.fats);
+  document.getElementById('nutri-sugar').textContent = formatMacro(n.sugar);
+  document.getElementById('nutri-fiber').textContent = formatMacro(n.fiber);
+  const note = document.getElementById('nutri-note');
+  if (n.meals === 0) {
+    note.textContent = 'Aucun repas renseigné aujourd\'hui.';
+  } else if (n.macroMeals === 0) {
+    note.textContent = 'Calories renseignées, mais aucun détail protéines / glucides / lipides pour ces repas.';
+  } else if (n.macroMeals < n.meals) {
+    note.textContent = `${n.macroMeals}/${n.meals} repas avec nutriments. Les ajouts rapides ne comptent que les calories.`;
+  } else {
+    note.textContent = 'Tous les repas du jour ont des nutriments renseignés.';
+  }
+}
+
+function getProductMacrosForQty(product, qty) {
+  const factor = numberOrZero(qty) / 100;
+  return {
+    protein: roundMacro(numberOrZero(product.proteins) * factor),
+    carbs: roundMacro(numberOrZero(product.carbs) * factor),
+    fats: roundMacro(numberOrZero(product.fats) * factor),
+    sugar: roundMacro(numberOrZero(product.sugar) * factor),
+    fiber: roundMacro(numberOrZero(product.fiber) * factor)
+  };
+}
+
+function getAnalysisMacros(analysis = {}) {
+  return {
+    protein: roundMacro(firstMacroValue(analysis.proteines_g, analysis.proteins_g, analysis.protein_g, analysis.proteines, analysis.protein)),
+    carbs: roundMacro(firstMacroValue(analysis.glucides_g, analysis.carbs_g, analysis.carbohydrates_g, analysis.glucides, analysis.carbs)),
+    fats: roundMacro(firstMacroValue(analysis.lipides_g, analysis.fats_g, analysis.fat_g, analysis.lipides, analysis.fats, analysis.fat)),
+    sugar: roundMacro(firstMacroValue(analysis.sucres_g, analysis.sugars_g, analysis.sugar_g, analysis.sucres, analysis.sugar)),
+    fiber: roundMacro(firstMacroValue(analysis.fibres_g, analysis.fibers_g, analysis.fiber_g, analysis.fibres, analysis.fiber))
+  };
+}
+
+function formatMealMacros(meal) {
+  const macros = getMealMacros(meal);
+  const parts = [];
+  if (macros.protein) parts.push(`<span>P ${formatMacro(macros.protein)}g</span>`);
+  if (macros.carbs) parts.push(`<span>G ${formatMacro(macros.carbs)}g</span>`);
+  if (macros.fats) parts.push(`<span>L ${formatMacro(macros.fats)}g</span>`);
+  if (macros.fiber) parts.push(`<span>Fib ${formatMacro(macros.fiber)}g</span>`);
+  return parts.length ? `<div class="meal-macros">${parts.join('')}</div>` : '';
+}
 function getTodayCalories() {
   const meals = state.calorieEntries[todayKey()] || [];
   return meals.reduce((sum, m) => sum + m.cal, 0);
+}
+
+
+const FOOD_PRESETS = [
+  { id: 'chicken', name: 'Poulet grillé', cal: 165, protein: 31, carbs: 0, fats: 3.6, sugar: 0, fiber: 0, defaultQty: 120 },
+  { id: 'rice', name: 'Riz cuit', cal: 130, protein: 2.7, carbs: 28.2, fats: 0.3, sugar: 0.1, fiber: 0.4, defaultQty: 150 },
+  { id: 'pasta', name: 'Pâtes cuites', cal: 158, protein: 5.8, carbs: 30.9, fats: 0.9, sugar: 0.6, fiber: 1.8, defaultQty: 150 },
+  { id: 'potato', name: 'Pomme de terre vapeur', cal: 87, protein: 1.9, carbs: 20.1, fats: 0.1, sugar: 0.8, fiber: 1.8, defaultQty: 200 },
+  { id: 'salmon', name: 'Saumon', cal: 208, protein: 20, carbs: 0, fats: 13, sugar: 0, fiber: 0, defaultQty: 120 },
+  { id: 'tuna', name: 'Thon naturel', cal: 116, protein: 26, carbs: 0, fats: 1, sugar: 0, fiber: 0, defaultQty: 100 },
+  { id: 'egg', name: 'Oeuf entier', cal: 143, protein: 13, carbs: 1.1, fats: 10, sugar: 1.1, fiber: 0, defaultQty: 60 },
+  { id: 'skyr', name: 'Skyr nature', cal: 63, protein: 11, carbs: 4, fats: 0.2, sugar: 4, fiber: 0, defaultQty: 150 },
+  { id: 'white-cheese', name: 'Fromage blanc 0%', cal: 46, protein: 8, carbs: 3.8, fats: 0.2, sugar: 3.8, fiber: 0, defaultQty: 150 },
+  { id: 'oats', name: "Flocons d'avoine", cal: 389, protein: 17, carbs: 66, fats: 7, sugar: 1, fiber: 10, defaultQty: 50 },
+  { id: 'bread', name: 'Pain complet', cal: 247, protein: 13, carbs: 41, fats: 4.2, sugar: 5.5, fiber: 7, defaultQty: 60 },
+  { id: 'lentils', name: 'Lentilles cuites', cal: 116, protein: 9, carbs: 20, fats: 0.4, sugar: 1.8, fiber: 8, defaultQty: 180 },
+  { id: 'steak', name: 'Steak haché 5%', cal: 137, protein: 21, carbs: 0, fats: 5, sugar: 0, fiber: 0, defaultQty: 125 },
+  { id: 'vegetables', name: 'Légumes verts', cal: 35, protein: 2, carbs: 5, fats: 0.4, sugar: 2, fiber: 3, defaultQty: 200 },
+  { id: 'banana', name: 'Banane', cal: 89, protein: 1.1, carbs: 22.8, fats: 0.3, sugar: 12.2, fiber: 2.6, defaultQty: 120 },
+  { id: 'apple', name: 'Pomme', cal: 52, protein: 0.3, carbs: 14, fats: 0.2, sugar: 10.4, fiber: 2.4, defaultQty: 150 },
+  { id: 'avocado', name: 'Avocat', cal: 160, protein: 2, carbs: 8.5, fats: 14.7, sugar: 0.7, fiber: 6.7, defaultQty: 80 },
+  { id: 'almonds', name: 'Amandes', cal: 579, protein: 21, carbs: 22, fats: 50, sugar: 4.4, fiber: 12.5, defaultQty: 25 },
+  { id: 'olive-oil', name: "Huile d'olive", cal: 884, protein: 0, carbs: 0, fats: 100, sugar: 0, fiber: 0, defaultQty: 10 },
+  { id: 'milk', name: 'Lait demi-écrémé', cal: 47, protein: 3.4, carbs: 4.8, fats: 1.6, sugar: 4.8, fiber: 0, defaultQty: 200, unit: 'ml' }
+];
+
+function getFoodPresetById(id) {
+  return FOOD_PRESETS.find(food => food.id === id) || FOOD_PRESETS[0];
+}
+
+function initFoodPresets() {
+  const select = document.getElementById('food-preset-select');
+  if (!select) return;
+  select.innerHTML = FOOD_PRESETS.map(food => {
+    const unit = food.unit || 'g';
+    return '<option value="' + food.id + '">' + food.name + ' - ' + food.cal + ' kcal/100' + unit + '</option>';
+  }).join('');
+  select.value = FOOD_PRESETS[0].id;
+  selectFoodPreset();
+}
+
+function selectFoodPreset() {
+  const select = document.getElementById('food-preset-select');
+  const qtyInput = document.getElementById('food-preset-qty');
+  if (!select || !qtyInput) return;
+  const food = getFoodPresetById(select.value);
+  qtyInput.value = food.defaultQty || 100;
+  updateFoodPresetCalc();
+}
+
+function calcFoodPreset(food, qty) {
+  const factor = Math.max(0, qty) / 100;
+  return {
+    cal: Math.round(numberOrZero(food.cal) * factor),
+    protein: roundMacro(numberOrZero(food.protein) * factor),
+    carbs: roundMacro(numberOrZero(food.carbs) * factor),
+    fats: roundMacro(numberOrZero(food.fats) * factor),
+    sugar: roundMacro(numberOrZero(food.sugar) * factor),
+    fiber: roundMacro(numberOrZero(food.fiber) * factor)
+  };
+}
+
+function formatFoodPresetMacro(value) {
+  const rounded = roundMacro(value);
+  return (Number.isInteger(rounded) ? rounded : rounded.toFixed(1)) + 'g';
+}
+
+function updateFoodPresetCalc() {
+  const select = document.getElementById('food-preset-select');
+  const qtyInput = document.getElementById('food-preset-qty');
+  const calcEl = document.getElementById('food-preset-calc');
+  if (!select || !qtyInput || !calcEl) return;
+  const food = getFoodPresetById(select.value);
+  const qty = parseFloat(qtyInput.value) || 0;
+  const calc = calcFoodPreset(food, qty);
+  calcEl.innerHTML = `
+    <div class="food-preset-chip main"><b>${calc.cal}</b><span>kcal</span></div>
+    <div class="food-preset-chip"><b>${formatFoodPresetMacro(calc.protein)}</b><span>prot</span></div>
+    <div class="food-preset-chip"><b>${formatFoodPresetMacro(calc.carbs)}</b><span>gluc</span></div>
+    <div class="food-preset-chip"><b>${formatFoodPresetMacro(calc.fats)}</b><span>lip</span></div>
+  `;
+}
+
+function addSelectedFood() {
+  const select = document.getElementById('food-preset-select');
+  const qtyInput = document.getElementById('food-preset-qty');
+  if (!select || !qtyInput) return;
+  const food = getFoodPresetById(select.value);
+  const qty = parseFloat(qtyInput.value);
+  if (!qty || qty <= 0) { showToast('Entre une quantité valide'); return; }
+  const calc = calcFoodPreset(food, qty);
+  const key = todayKey();
+  if (!state.calorieEntries[key]) state.calorieEntries[key] = [];
+  state.calorieEntries[key].push({
+    time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
+    cal: calc.cal,
+    source: 'preset',
+    description: food.name + ' - ' + qty + (food.unit || 'g'),
+    macros: {
+      protein: calc.protein,
+      carbs: calc.carbs,
+      fats: calc.fats,
+      sugar: calc.sugar,
+      fiber: calc.fiber
+    }
+  });
+  save();
+  updateCaloriesRing();
+  updateMealList();
+  showToast(food.name + ' ajouté : +' + calc.cal + ' kcal');
 }
 
 function addCal(amount) {
@@ -1904,6 +2443,9 @@ function updateCaloriesRing() {
     sub.innerHTML = `Reste <b>${goal - net}</b> sur ${goal} kcal`;
     sub.classList.remove('over');
   }
+
+  updateDailyNutrition();
+  if (document.getElementById('cal-grid')) renderCalendar();
 }
 
 function updateSteps() {
@@ -2057,6 +2599,7 @@ function renderCalendar() {
       failCount++;
       tempStreak = 0;
     } else {
+      el.classList.add('none');
       tempStreak = 0;
     }
     if (isToday) el.classList.add('today');
@@ -2308,10 +2851,12 @@ function confirmPhotoCalories() {
   if (!val || val <= 0) { showToast('Valeur invalide'); return; }
 
   const key = todayKey();
+  const macros = getAnalysisMacros(pendingPhotoAnalysis || {});
   if (!state.calorieEntries[key]) state.calorieEntries[key] = [];
   state.calorieEntries[key].push({
     time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
     cal: val,
+    macros,
     source: 'photo',
     description: pendingPhotoAnalysis?.description || ''
   });
@@ -2329,11 +2874,13 @@ function updateMealList() {
   el.innerHTML = meals.map((m, i) => {
     const icon = m.source === 'photo' ? '📸' : (m.source === 'barcode' ? '📊' : '🍽️');
     const desc = m.description ? `<div style="font-size:11px; color:var(--text-muted); font-weight:600; margin-top:2px">${m.description}</div>` : '';
+    const macroHtml = formatMealMacros(m);
     return `
       <div class="meal-item">
         <div style="flex:1; min-width:0">
           <span class="meal-time">${icon} ${m.time}</span>
           ${desc}
+          ${macroHtml}
         </div>
         <div style="display:flex; align-items:center">
           <span class="meal-cal">${m.cal} kcal</span>
@@ -2701,6 +3248,11 @@ Réponds UNIQUEMENT en JSON valide, sans texte autour, sans backticks. Format ex
     { "nom": "Nom aliment", "quantite": "estimation précise (ex: ~150g cuit, 1 portion ~200g)", "calories": 250 }
   ],
   "total_calories": 650,
+  "proteines_g": 35,
+  "glucides_g": 70,
+  "lipides_g": 25,
+  "sucres_g": 10,
+  "fibres_g": 6,
   "confiance": "haute/moyenne/faible",
   "conseil": "Phrase courte de conseil nutritionnel adapté (1-2 phrases) en mentionnant si c'est un repas équilibré ou non"
 }`
@@ -2952,6 +3504,7 @@ async function searchOpenFoodFacts(barcode) {
     const carbs = p.nutriments?.carbohydrates_100g || 0;
     const fats = p.nutriments?.fat_100g || 0;
     const sugar = p.nutriments?.sugars_100g || 0;
+    const fiber = p.nutriments?.fiber_100g || 0;
     const servingSize = p.serving_size || '';
     const servingQty = p.serving_quantity || null;
     const nutriscore = p.nutriscore_grade || '';
@@ -2966,7 +3519,7 @@ async function searchOpenFoodFacts(barcode) {
       name,
       brand,
       kcalPer100g: Math.round(kcalPer100g),
-      proteins, carbs, fats, sugar,
+      proteins, carbs, fats, sugar, fiber,
       servingSize,
       servingQty: servingQty ? parseFloat(servingQty) : null,
       nutriscore
@@ -2999,6 +3552,7 @@ function showProductResult() {
   if (currentProduct.proteins) infoEl.innerHTML += `<span class="product-info-chip">P: <b>${currentProduct.proteins.toFixed(1)}g</b></span>`;
   if (currentProduct.carbs) infoEl.innerHTML += `<span class="product-info-chip">G: <b>${currentProduct.carbs.toFixed(1)}g</b></span>`;
   if (currentProduct.fats) infoEl.innerHTML += `<span class="product-info-chip">L: <b>${currentProduct.fats.toFixed(1)}g</b></span>`;
+  if (currentProduct.fiber) infoEl.innerHTML += `<span class="product-info-chip">Fib: <b>${currentProduct.fiber.toFixed(1)}g</b></span>`;
 
   // Bouton portion
   const servingBtn = document.getElementById('serving-btn');
@@ -3047,12 +3601,13 @@ function confirmBarcodeProduct() {
   if (qty <= 0) { showToast('Quantité invalide'); return; }
   const cal = Math.round((currentProduct.kcalPer100g * qty) / 100);
   if (cal <= 0) { showToast('Calories nulles'); return; }
-
+  const macros = getProductMacrosForQty(currentProduct, qty);
   const key = todayKey();
   if (!state.calorieEntries[key]) state.calorieEntries[key] = [];
   state.calorieEntries[key].push({
     time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
     cal,
+    macros,
     source: 'barcode',
     description: `${currentProduct.name}${currentProduct.brand ? ' (' + currentProduct.brand + ')' : ''} · ${qty}g`
   });
