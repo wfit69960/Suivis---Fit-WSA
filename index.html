@@ -1200,6 +1200,201 @@
     cursor: pointer;
   }
   .food-preset-add:active { transform: scale(0.98); }
+  .food-search-wrap { position: relative; }
+  .food-search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface2);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    padding: 10px 12px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .food-search-box:focus-within {
+    border-color: var(--primary);
+    background: var(--surface);
+  }
+  .food-search-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .food-search-box input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .food-search-box input::placeholder { color: var(--text-muted); font-weight: 600; }
+  .food-search-clear {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.08);
+    color: var(--text-muted);
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1;
+    cursor: pointer;
+    display: none;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .food-search-clear.visible { display: flex; align-items: center; justify-content: center; }
+  .food-search-results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
+    max-height: 380px;
+    overflow-y: auto;
+    z-index: 50;
+    display: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .food-search-results.visible { display: block; }
+  .food-search-item {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.1s;
+  }
+  .food-search-item:last-child { border-bottom: none; }
+  .food-search-item:active { background: var(--primary-light); }
+  @media (hover: hover) {
+    .food-search-item:hover { background: var(--surface2); }
+  }
+  .food-search-item-info { flex: 1; min-width: 0; }
+  .food-search-item-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .food-search-item-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .food-search-item-cal {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--primary-dark);
+    background: var(--primary-light);
+    padding: 4px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .food-search-empty,
+  .food-search-loading {
+    padding: 16px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+  .food-search-section {
+    font-size: 10px;
+    font-weight: 900;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 8px 14px 4px;
+    background: var(--surface2);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .food-source-badge {
+    display: inline-block;
+    font-size: 8px;
+    font-weight: 900;
+    padding: 1px 5px;
+    border-radius: 4px;
+    margin-right: 4px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    letter-spacing: 0.03em;
+  }
+  .food-source-ciqual { background: #e0f2fe; color: #0369a1; }
+  .food-source-off { background: #fef3c7; color: #92400e; }
+  .food-source-usda { background: #ede9fe; color: #6d28d9; }
+  .food-selected {
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--surface2);
+    border-radius: 14px;
+  }
+  .food-selected-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .food-selected-name {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--text);
+  }
+  .food-selected-meta {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .food-qty-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    padding: 8px 12px;
+    width: 100%;
+  }
+  .food-qty-wrap:focus-within { border-color: var(--primary); }
+  .food-qty-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-muted);
+  }
+  .food-qty-wrap input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    text-align: right;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .food-qty-unit {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-muted);
+  }
   @media (max-width: 380px) {
     .food-preset-row { grid-template-columns: 1fr 76px; }
     .food-preset-calc { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1319,19 +1514,36 @@
     <div class="food-preset">
       <div class="food-preset-head">
         <div class="food-preset-title">Ajouter un aliment</div>
-        <div class="food-preset-sub">type FatSecret</div>
+        <div class="food-preset-sub" id="food-search-sub">FatSecret style</div>
       </div>
-      <div class="food-preset-row">
-        <select id="food-preset-select" onchange="selectFoodPreset()" aria-label="Aliment"></select>
-        <input type="number" id="food-preset-qty" value="100" min="1" inputmode="decimal" oninput="updateFoodPresetCalc()" aria-label="Quantité">
+      <div class="food-search-wrap">
+        <div class="food-search-box">
+          <svg class="food-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="food-search-input" placeholder="Rechercher un aliment (ex: œuf au plat)" autocomplete="off" oninput="onFoodSearchInput()" onfocus="onFoodSearchInput()">
+          <button class="food-search-clear" id="food-search-clear" onclick="clearFoodSearch()" type="button" aria-label="Effacer">×</button>
+        </div>
+        <div class="food-search-results" id="food-search-results"></div>
       </div>
-      <div class="food-preset-calc" id="food-preset-calc">
-        <div class="food-preset-chip main"><b>0</b><span>kcal</span></div>
-        <div class="food-preset-chip"><b>0g</b><span>prot</span></div>
-        <div class="food-preset-chip"><b>0g</b><span>gluc</span></div>
-        <div class="food-preset-chip"><b>0g</b><span>lip</span></div>
+      <div class="food-selected" id="food-selected" style="display:none">
+        <div class="food-selected-info">
+          <div class="food-selected-name" id="food-selected-name">—</div>
+          <div class="food-selected-meta" id="food-selected-meta">—</div>
+        </div>
+        <div class="food-preset-row" style="margin-top:10px">
+          <div class="food-qty-wrap">
+            <span class="food-qty-label">Quantité</span>
+            <input type="number" id="food-preset-qty" value="100" min="1" inputmode="decimal" oninput="updateFoodPresetCalc()" aria-label="Quantité">
+            <span class="food-qty-unit" id="food-qty-unit">g</span>
+          </div>
+        </div>
+        <div class="food-preset-calc" id="food-preset-calc">
+          <div class="food-preset-chip main"><b>0</b><span>kcal</span></div>
+          <div class="food-preset-chip"><b>0g</b><span>prot</span></div>
+          <div class="food-preset-chip"><b>0g</b><span>gluc</span></div>
+          <div class="food-preset-chip"><b>0g</b><span>lip</span></div>
+        </div>
+        <button class="food-preset-add" onclick="addSelectedFood()">Ajouter au journal</button>
       </div>
-      <button class="food-preset-add" onclick="addSelectedFood()">Ajouter au journal</button>
     </div>
 
     <button class="photo-btn" onclick="document.getElementById('photo-input').click()">
@@ -2228,50 +2440,299 @@ function getTodayCalories() {
 }
 
 
-const FOOD_PRESETS = [
-  { id: 'chicken', name: 'Poulet grillé', cal: 165, protein: 31, carbs: 0, fats: 3.6, sugar: 0, fiber: 0, defaultQty: 120 },
-  { id: 'rice', name: 'Riz cuit', cal: 130, protein: 2.7, carbs: 28.2, fats: 0.3, sugar: 0.1, fiber: 0.4, defaultQty: 150 },
-  { id: 'pasta', name: 'Pâtes cuites', cal: 158, protein: 5.8, carbs: 30.9, fats: 0.9, sugar: 0.6, fiber: 1.8, defaultQty: 150 },
-  { id: 'potato', name: 'Pomme de terre vapeur', cal: 87, protein: 1.9, carbs: 20.1, fats: 0.1, sugar: 0.8, fiber: 1.8, defaultQty: 200 },
-  { id: 'salmon', name: 'Saumon', cal: 208, protein: 20, carbs: 0, fats: 13, sugar: 0, fiber: 0, defaultQty: 120 },
-  { id: 'tuna', name: 'Thon naturel', cal: 116, protein: 26, carbs: 0, fats: 1, sugar: 0, fiber: 0, defaultQty: 100 },
-  { id: 'egg', name: 'Oeuf entier', cal: 143, protein: 13, carbs: 1.1, fats: 10, sugar: 1.1, fiber: 0, defaultQty: 60 },
-  { id: 'skyr', name: 'Skyr nature', cal: 63, protein: 11, carbs: 4, fats: 0.2, sugar: 4, fiber: 0, defaultQty: 150 },
-  { id: 'white-cheese', name: 'Fromage blanc 0%', cal: 46, protein: 8, carbs: 3.8, fats: 0.2, sugar: 3.8, fiber: 0, defaultQty: 150 },
-  { id: 'oats', name: "Flocons d'avoine", cal: 389, protein: 17, carbs: 66, fats: 7, sugar: 1, fiber: 10, defaultQty: 50 },
-  { id: 'bread', name: 'Pain complet', cal: 247, protein: 13, carbs: 41, fats: 4.2, sugar: 5.5, fiber: 7, defaultQty: 60 },
-  { id: 'lentils', name: 'Lentilles cuites', cal: 116, protein: 9, carbs: 20, fats: 0.4, sugar: 1.8, fiber: 8, defaultQty: 180 },
-  { id: 'steak', name: 'Steak haché 5%', cal: 137, protein: 21, carbs: 0, fats: 5, sugar: 0, fiber: 0, defaultQty: 125 },
-  { id: 'vegetables', name: 'Légumes verts', cal: 35, protein: 2, carbs: 5, fats: 0.4, sugar: 2, fiber: 3, defaultQty: 200 },
-  { id: 'banana', name: 'Banane', cal: 89, protein: 1.1, carbs: 22.8, fats: 0.3, sugar: 12.2, fiber: 2.6, defaultQty: 120 },
-  { id: 'apple', name: 'Pomme', cal: 52, protein: 0.3, carbs: 14, fats: 0.2, sugar: 10.4, fiber: 2.4, defaultQty: 150 },
-  { id: 'avocado', name: 'Avocat', cal: 160, protein: 2, carbs: 8.5, fats: 14.7, sugar: 0.7, fiber: 6.7, defaultQty: 80 },
-  { id: 'almonds', name: 'Amandes', cal: 579, protein: 21, carbs: 22, fats: 50, sugar: 4.4, fiber: 12.5, defaultQty: 25 },
-  { id: 'olive-oil', name: "Huile d'olive", cal: 884, protein: 0, carbs: 0, fats: 100, sugar: 0, fiber: 0, defaultQty: 10 },
-  { id: 'milk', name: 'Lait demi-écrémé', cal: 47, protein: 3.4, carbs: 4.8, fats: 1.6, sugar: 4.8, fiber: 0, defaultQty: 200, unit: 'ml' }
-];
+const LOCAL_FOODS = [{"id":"oeuf-cru","name":"Œuf entier cru","cal":143,"protein":13,"carbs":1.1,"fats":10,"sugar":1.1,"fiber":0,"defaultQty":60},{"id":"oeuf-dur","name":"Œuf dur","cal":134,"protein":12.6,"carbs":1.1,"fats":9.5,"sugar":1.1,"fiber":0,"defaultQty":60},{"id":"oeuf-plat","name":"Œuf au plat","cal":196,"protein":13.6,"carbs":0.9,"fats":15.3,"sugar":0.9,"fiber":0,"defaultQty":60},{"id":"oeuf-poche","name":"Œuf poché","cal":142,"protein":12.5,"carbs":0.7,"fats":9.8,"sugar":0.7,"fiber":0,"defaultQty":60},{"id":"oeuf-coque","name":"Œuf à la coque","cal":143,"protein":13,"carbs":1.1,"fats":10,"sugar":1.1,"fiber":0,"defaultQty":60},{"id":"oeuf-brouille","name":"Œufs brouillés","cal":166,"protein":11,"carbs":1.6,"fats":12.4,"sugar":1.6,"fiber":0,"defaultQty":100},{"id":"omelette-nature","name":"Omelette nature","cal":154,"protein":11,"carbs":0.6,"fats":11.7,"sugar":0.6,"fiber":0,"defaultQty":120},{"id":"omelette-fromage","name":"Omelette au fromage","cal":222,"protein":14.3,"carbs":0.8,"fats":17.5,"sugar":0.8,"fiber":0,"defaultQty":130},{"id":"omelette-jambon","name":"Omelette au jambon","cal":178,"protein":13.6,"carbs":0.8,"fats":13,"sugar":0.8,"fiber":0,"defaultQty":130},{"id":"blanc-oeuf","name":"Blanc d'œuf","cal":48,"protein":10.7,"carbs":0.7,"fats":0.2,"sugar":0.7,"fiber":0,"defaultQty":30},{"id":"jaune-oeuf","name":"Jaune d'œuf","cal":327,"protein":16,"carbs":3.6,"fats":27.5,"sugar":0.6,"fiber":0,"defaultQty":18},{"id":"poulet-grille","name":"Poulet grillé","cal":165,"protein":31,"carbs":0,"fats":3.6,"sugar":0,"fiber":0,"defaultQty":120},{"id":"poulet-roti","name":"Poulet rôti","cal":175,"protein":28.5,"carbs":0,"fats":6.5,"sugar":0,"fiber":0,"defaultQty":120},{"id":"blanc-poulet","name":"Blanc de poulet","cal":121,"protein":23,"carbs":0,"fats":3,"sugar":0,"fiber":0,"defaultQty":120},{"id":"cuisse-poulet","name":"Cuisse de poulet rôtie","cal":213,"protein":26,"carbs":0,"fats":12,"sugar":0,"fiber":0,"defaultQty":150},{"id":"escalope-dinde","name":"Escalope de dinde","cal":124,"protein":26,"carbs":0,"fats":2,"sugar":0,"fiber":0,"defaultQty":120},{"id":"steak-5","name":"Steak haché 5%","cal":137,"protein":21,"carbs":0,"fats":5,"sugar":0,"fiber":0,"defaultQty":125},{"id":"steak-15","name":"Steak haché 15%","cal":220,"protein":19,"carbs":0,"fats":15,"sugar":0,"fiber":0,"defaultQty":125},{"id":"steak-20","name":"Steak haché 20%","cal":250,"protein":18,"carbs":0,"fats":20,"sugar":0,"fiber":0,"defaultQty":125},{"id":"entrecote","name":"Entrecôte de bœuf","cal":235,"protein":25,"carbs":0,"fats":15,"sugar":0,"fiber":0,"defaultQty":150},{"id":"rumsteak","name":"Rumsteak grillé","cal":198,"protein":28,"carbs":0,"fats":9.5,"sugar":0,"fiber":0,"defaultQty":150},{"id":"filet-boeuf","name":"Filet de bœuf","cal":217,"protein":28,"carbs":0,"fats":11,"sugar":0,"fiber":0,"defaultQty":150},{"id":"bavette","name":"Bavette d'aloyau","cal":213,"protein":26,"carbs":0,"fats":12,"sugar":0,"fiber":0,"defaultQty":150},{"id":"rosbif","name":"Rôti de bœuf","cal":156,"protein":26,"carbs":0,"fats":5.5,"sugar":0,"fiber":0,"defaultQty":100},{"id":"escalope-veau","name":"Escalope de veau","cal":165,"protein":30,"carbs":0,"fats":5,"sugar":0,"fiber":0,"defaultQty":120},{"id":"cote-veau","name":"Côte de veau","cal":195,"protein":27,"carbs":0,"fats":9.5,"sugar":0,"fiber":0,"defaultQty":150},{"id":"cote-porc","name":"Côte de porc grillée","cal":218,"protein":28,"carbs":0,"fats":12,"sugar":0,"fiber":0,"defaultQty":150},{"id":"filet-porc","name":"Filet mignon de porc","cal":161,"protein":27.5,"carbs":0,"fats":5.5,"sugar":0,"fiber":0,"defaultQty":130},{"id":"rouelle-porc","name":"Rouelle de porc","cal":240,"protein":26,"carbs":0,"fats":15,"sugar":0,"fiber":0,"defaultQty":150},{"id":"cote-agneau","name":"Côte d'agneau","cal":250,"protein":25,"carbs":0,"fats":17,"sugar":0,"fiber":0,"defaultQty":130},{"id":"gigot-agneau","name":"Gigot d'agneau","cal":213,"protein":28,"carbs":0,"fats":11,"sugar":0,"fiber":0,"defaultQty":130},{"id":"magret-canard","name":"Magret de canard","cal":239,"protein":23,"carbs":0,"fats":17,"sugar":0,"fiber":0,"defaultQty":150},{"id":"confit-canard","name":"Confit de canard","cal":286,"protein":26,"carbs":0,"fats":20,"sugar":0,"fiber":0,"defaultQty":150},{"id":"foie-gras","name":"Foie gras","cal":462,"protein":7,"carbs":4.7,"fats":47,"sugar":4,"fiber":0,"defaultQty":30},{"id":"boudin-noir","name":"Boudin noir","cal":320,"protein":14,"carbs":1.5,"fats":28,"sugar":1,"fiber":0,"defaultQty":100},{"id":"boudin-blanc","name":"Boudin blanc","cal":270,"protein":12,"carbs":4,"fats":24,"sugar":1,"fiber":0,"defaultQty":100},{"id":"saucisse-toulouse","name":"Saucisse de Toulouse","cal":280,"protein":15,"carbs":0.5,"fats":24,"sugar":0.5,"fiber":0,"defaultQty":100},{"id":"merguez","name":"Merguez","cal":270,"protein":14,"carbs":1,"fats":23,"sugar":0.5,"fiber":0,"defaultQty":80},{"id":"chipolata","name":"Chipolata","cal":300,"protein":14,"carbs":1,"fats":27,"sugar":0.5,"fiber":0,"defaultQty":80},{"id":"knacki","name":"Knacki","cal":260,"protein":11,"carbs":1.5,"fats":23,"sugar":1,"fiber":0,"defaultQty":70},{"id":"cervelas","name":"Cervelas","cal":290,"protein":12,"carbs":2,"fats":26,"sugar":1,"fiber":0,"defaultQty":100},{"id":"rilettes","name":"Rillettes","cal":460,"protein":17,"carbs":0,"fats":44,"sugar":0,"fiber":0,"defaultQty":30},{"id":"pate-campagne","name":"Pâté de campagne","cal":280,"protein":14,"carbs":1,"fats":24,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"mousse-canard","name":"Mousse de canard","cal":350,"protein":11,"carbs":2,"fats":33,"sugar":1,"fiber":0,"defaultQty":30},{"id":"jambon-blanc","name":"Jambon blanc","cal":110,"protein":21,"carbs":0.5,"fats":2.5,"sugar":0.5,"fiber":0,"defaultQty":50},{"id":"jambon-cru","name":"Jambon cru / de pays","cal":235,"protein":28,"carbs":0.5,"fats":14,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"jambon-bayonne","name":"Jambon de Bayonne","cal":235,"protein":27,"carbs":0.5,"fats":14,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"jambon-parme","name":"Jambon de Parme","cal":269,"protein":26,"carbs":0,"fats":18,"sugar":0,"fiber":0,"defaultQty":30},{"id":"bacon","name":"Bacon","cal":234,"protein":20,"carbs":1,"fats":17,"sugar":0,"fiber":0,"defaultQty":30},{"id":"lardons","name":"Lardons fumés","cal":295,"protein":17,"carbs":0.5,"fats":25,"sugar":0.5,"fiber":0,"defaultQty":50},{"id":"saucisson-sec","name":"Saucisson sec","cal":432,"protein":25,"carbs":1.5,"fats":36,"sugar":1,"fiber":0,"defaultQty":30},{"id":"rosette","name":"Rosette de Lyon","cal":410,"protein":26,"carbs":1,"fats":34,"sugar":1,"fiber":0,"defaultQty":30},{"id":"chorizo","name":"Chorizo","cal":420,"protein":24,"carbs":2,"fats":35,"sugar":1,"fiber":0,"defaultQty":30},{"id":"salami","name":"Salami","cal":380,"protein":22,"carbs":1.5,"fats":32,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"mortadelle","name":"Mortadelle","cal":290,"protein":16,"carbs":1,"fats":25,"sugar":1,"fiber":0,"defaultQty":30},{"id":"coppa","name":"Coppa","cal":360,"protein":25,"carbs":0,"fats":28,"sugar":0,"fiber":0,"defaultQty":30},{"id":"andouille","name":"Andouille de Vire","cal":280,"protein":17,"carbs":1,"fats":23,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"andouillette","name":"Andouillette","cal":270,"protein":16,"carbs":1,"fats":22,"sugar":0.5,"fiber":0,"defaultQty":100},{"id":"saumon-cru","name":"Saumon cru","cal":198,"protein":20,"carbs":0,"fats":13,"sugar":0,"fiber":0,"defaultQty":120},{"id":"saumon-cuit","name":"Saumon cuit","cal":208,"protein":20,"carbs":0,"fats":13,"sugar":0,"fiber":0,"defaultQty":120},{"id":"saumon-fume","name":"Saumon fumé","cal":182,"protein":25,"carbs":0,"fats":9,"sugar":0,"fiber":0,"defaultQty":60},{"id":"truite","name":"Truite cuite","cal":140,"protein":21,"carbs":0,"fats":6,"sugar":0,"fiber":0,"defaultQty":130},{"id":"cabillaud","name":"Cabillaud cuit","cal":82,"protein":18,"carbs":0,"fats":0.7,"sugar":0,"fiber":0,"defaultQty":130},{"id":"colin","name":"Colin / lieu noir","cal":88,"protein":19,"carbs":0,"fats":1,"sugar":0,"fiber":0,"defaultQty":130},{"id":"merlu","name":"Merlu cuit","cal":90,"protein":20,"carbs":0,"fats":1.5,"sugar":0,"fiber":0,"defaultQty":130},{"id":"bar","name":"Bar / loup cuit","cal":124,"protein":23,"carbs":0,"fats":3.5,"sugar":0,"fiber":0,"defaultQty":130},{"id":"dorade","name":"Dorade cuite","cal":116,"protein":21,"carbs":0,"fats":3.5,"sugar":0,"fiber":0,"defaultQty":130},{"id":"sole","name":"Sole cuite","cal":92,"protein":20,"carbs":0,"fats":1.5,"sugar":0,"fiber":0,"defaultQty":130},{"id":"limande","name":"Limande cuite","cal":92,"protein":21,"carbs":0,"fats":0.8,"sugar":0,"fiber":0,"defaultQty":130},{"id":"merlan","name":"Merlan cuit","cal":89,"protein":19,"carbs":0,"fats":1,"sugar":0,"fiber":0,"defaultQty":130},{"id":"sardine","name":"Sardine grillée","cal":215,"protein":25,"carbs":0,"fats":13,"sugar":0,"fiber":0,"defaultQty":100},{"id":"sardine-huile","name":"Sardine à l'huile","cal":220,"protein":24,"carbs":0,"fats":14,"sugar":0,"fiber":0,"defaultQty":80},{"id":"maquereau","name":"Maquereau cuit","cal":230,"protein":25,"carbs":0,"fats":15,"sugar":0,"fiber":0,"defaultQty":100},{"id":"maquereau-vinblanc","name":"Maquereau au vin blanc","cal":188,"protein":17,"carbs":1.5,"fats":12.5,"sugar":1.5,"fiber":0,"defaultQty":80},{"id":"hareng","name":"Hareng grillé","cal":248,"protein":23,"carbs":0,"fats":17,"sugar":0,"fiber":0,"defaultQty":100},{"id":"anchois","name":"Anchois à l'huile","cal":200,"protein":25,"carbs":0,"fats":11,"sugar":0,"fiber":0,"defaultQty":30},{"id":"thon-naturel","name":"Thon naturel","cal":116,"protein":26,"carbs":0,"fats":1,"sugar":0,"fiber":0,"defaultQty":100},{"id":"thon-huile","name":"Thon à l'huile","cal":200,"protein":27,"carbs":0,"fats":10,"sugar":0,"fiber":0,"defaultQty":100},{"id":"thon-cru","name":"Thon cru","cal":144,"protein":23,"carbs":0,"fats":5,"sugar":0,"fiber":0,"defaultQty":120},{"id":"espadon","name":"Espadon grillé","cal":155,"protein":22,"carbs":0,"fats":7,"sugar":0,"fiber":0,"defaultQty":130},{"id":"rouget","name":"Rouget grillé","cal":130,"protein":21,"carbs":0,"fats":5,"sugar":0,"fiber":0,"defaultQty":130},{"id":"raie","name":"Aile de raie","cal":95,"protein":22,"carbs":0,"fats":0.7,"sugar":0,"fiber":0,"defaultQty":130},{"id":"lotte","name":"Lotte cuite","cal":92,"protein":21,"carbs":0,"fats":0.6,"sugar":0,"fiber":0,"defaultQty":130},{"id":"morue","name":"Morue salée","cal":130,"protein":29,"carbs":0,"fats":1,"sugar":0,"fiber":0,"defaultQty":80},{"id":"brandade","name":"Brandade de morue","cal":175,"protein":11,"carbs":11,"fats":9,"sugar":1,"fiber":0.5,"defaultQty":150},{"id":"tarama","name":"Tarama","cal":470,"protein":8,"carbs":4,"fats":47,"sugar":2,"fiber":0,"defaultQty":30},{"id":"rillettes-thon","name":"Rillettes de thon","cal":280,"protein":14,"carbs":1,"fats":24,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"surimi","name":"Surimi","cal":99,"protein":11,"carbs":12,"fats":1,"sugar":6,"fiber":0,"defaultQty":80},{"id":"crevettes","name":"Crevettes cuites","cal":99,"protein":24,"carbs":0.2,"fats":0.3,"sugar":0,"fiber":0,"defaultQty":100},{"id":"gambas","name":"Gambas grillées","cal":100,"protein":22,"carbs":0,"fats":1,"sugar":0,"fiber":0,"defaultQty":100},{"id":"langoustine","name":"Langoustine cuite","cal":91,"protein":19,"carbs":0.5,"fats":1.5,"sugar":0,"fiber":0,"defaultQty":100},{"id":"homard","name":"Homard cuit","cal":89,"protein":19,"carbs":0,"fats":1,"sugar":0,"fiber":0,"defaultQty":100},{"id":"crabe","name":"Crabe cuit","cal":105,"protein":20,"carbs":0,"fats":2.5,"sugar":0,"fiber":0,"defaultQty":100},{"id":"tourteau","name":"Tourteau","cal":110,"protein":22,"carbs":0,"fats":2,"sugar":0,"fiber":0,"defaultQty":100},{"id":"moules","name":"Moules cuites","cal":115,"protein":18,"carbs":4,"fats":2.5,"sugar":0,"fiber":0,"defaultQty":100},{"id":"huitres","name":"Huîtres","cal":65,"protein":9,"carbs":4,"fats":1.5,"sugar":0.5,"fiber":0,"defaultQty":80},{"id":"coquilles-stjacques","name":"Coquilles Saint-Jacques","cal":105,"protein":19,"carbs":4,"fats":1,"sugar":0,"fiber":0,"defaultQty":100},{"id":"calamars","name":"Calamars cuits","cal":96,"protein":16,"carbs":3.5,"fats":1.5,"sugar":0,"fiber":0,"defaultQty":100},{"id":"poulpe","name":"Poulpe cuit","cal":82,"protein":15,"carbs":2.5,"fats":1,"sugar":0,"fiber":0,"defaultQty":100},{"id":"bigorneaux","name":"Bigorneaux","cal":130,"protein":24,"carbs":5,"fats":1.5,"sugar":0,"fiber":0,"defaultQty":50},{"id":"riz-blanc-cuit","name":"Riz blanc cuit","cal":130,"protein":2.7,"carbs":28,"fats":0.3,"sugar":0.1,"fiber":0.4,"defaultQty":150},{"id":"riz-complet-cuit","name":"Riz complet cuit","cal":123,"protein":2.7,"carbs":25.6,"fats":0.9,"sugar":0.4,"fiber":1.6,"defaultQty":150},{"id":"riz-basmati","name":"Riz basmati cuit","cal":138,"protein":3,"carbs":28,"fats":0.5,"sugar":0.1,"fiber":0.5,"defaultQty":150},{"id":"riz-thai","name":"Riz thaï cuit","cal":130,"protein":2.7,"carbs":28,"fats":0.3,"sugar":0.1,"fiber":0.4,"defaultQty":150},{"id":"riz-cantonais","name":"Riz cantonais","cal":165,"protein":5.5,"carbs":22,"fats":6,"sugar":1,"fiber":0.7,"defaultQty":200},{"id":"paella","name":"Paella","cal":175,"protein":9,"carbs":22,"fats":6,"sugar":1,"fiber":1,"defaultQty":250},{"id":"risotto","name":"Risotto","cal":167,"protein":4,"carbs":25,"fats":5,"sugar":1,"fiber":0.5,"defaultQty":200},{"id":"pates-cuites","name":"Pâtes cuites","cal":158,"protein":5.8,"carbs":30.9,"fats":0.9,"sugar":0.6,"fiber":1.8,"defaultQty":150},{"id":"pates-completes","name":"Pâtes complètes cuites","cal":149,"protein":6,"carbs":28,"fats":1.4,"sugar":0.7,"fiber":3.5,"defaultQty":150},{"id":"spaghetti-bolo","name":"Spaghetti bolognaise","cal":145,"protein":6.5,"carbs":18,"fats":5,"sugar":4,"fiber":1.5,"defaultQty":250},{"id":"spaghetti-carbo","name":"Spaghetti carbonara","cal":195,"protein":8,"carbs":22,"fats":8.5,"sugar":2,"fiber":1,"defaultQty":250},{"id":"lasagnes","name":"Lasagnes à la bolognaise","cal":165,"protein":8,"carbs":14,"fats":8.5,"sugar":3,"fiber":1.2,"defaultQty":250},{"id":"ravioli","name":"Raviolis sauce tomate","cal":100,"protein":3.5,"carbs":13,"fats":3.5,"sugar":3,"fiber":1,"defaultQty":200},{"id":"gnocchi","name":"Gnocchi cuits","cal":130,"protein":3,"carbs":25,"fats":1.7,"sugar":0.6,"fiber":1.3,"defaultQty":200},{"id":"nouilles-chinoises","name":"Nouilles chinoises","cal":138,"protein":5,"carbs":25,"fats":2,"sugar":0.5,"fiber":1.5,"defaultQty":150},{"id":"semoule-couscous","name":"Semoule de couscous cuite","cal":112,"protein":3.8,"carbs":23,"fats":0.2,"sugar":0.1,"fiber":1.4,"defaultQty":150},{"id":"couscous-poulet","name":"Couscous poulet légumes","cal":130,"protein":7,"carbs":17,"fats":4,"sugar":2,"fiber":1.7,"defaultQty":300},{"id":"boulgour","name":"Boulgour cuit","cal":120,"protein":3.5,"carbs":24,"fats":0.8,"sugar":0.2,"fiber":4.5,"defaultQty":150},{"id":"quinoa","name":"Quinoa cuit","cal":120,"protein":4.4,"carbs":21,"fats":1.9,"sugar":0.9,"fiber":2.8,"defaultQty":150},{"id":"ble","name":"Blé cuit (Ebly)","cal":128,"protein":4,"carbs":25,"fats":0.7,"sugar":0.5,"fiber":3.5,"defaultQty":150},{"id":"polenta","name":"Polenta cuite","cal":70,"protein":1.7,"carbs":14,"fats":0.5,"sugar":0.2,"fiber":1,"defaultQty":200},{"id":"avoine","name":"Flocons d'avoine","cal":389,"protein":17,"carbs":66,"fats":7,"sugar":1,"fiber":10,"defaultQty":50},{"id":"muesli","name":"Muesli","cal":360,"protein":10,"carbs":65,"fats":6,"sugar":18,"fiber":7,"defaultQty":50},{"id":"granola","name":"Granola","cal":470,"protein":10,"carbs":60,"fats":19,"sugar":25,"fiber":7,"defaultQty":50},{"id":"corn-flakes","name":"Corn flakes","cal":380,"protein":7,"carbs":84,"fats":1,"sugar":8,"fiber":3,"defaultQty":30},{"id":"special-k","name":"Céréales Special K","cal":380,"protein":11,"carbs":75,"fats":2,"sugar":17,"fiber":4,"defaultQty":30},{"id":"chocapic","name":"Céréales chocolatées","cal":396,"protein":8,"carbs":73,"fats":7,"sugar":23,"fiber":5,"defaultQty":30},{"id":"pomme-terre-vapeur","name":"Pomme de terre vapeur","cal":87,"protein":1.9,"carbs":20.1,"fats":0.1,"sugar":0.8,"fiber":1.8,"defaultQty":200},{"id":"pomme-terre-eau","name":"Pomme de terre à l'eau","cal":80,"protein":1.7,"carbs":18,"fats":0.1,"sugar":0.7,"fiber":1.7,"defaultQty":200},{"id":"pomme-terre-four","name":"Pomme de terre au four","cal":105,"protein":2.3,"carbs":23,"fats":0.1,"sugar":1,"fiber":2.3,"defaultQty":200},{"id":"frites-maison","name":"Frites maison","cal":312,"protein":3.4,"carbs":41,"fats":15,"sugar":0.4,"fiber":3.4,"defaultQty":150},{"id":"frites-fast-food","name":"Frites de fast-food","cal":320,"protein":3.5,"carbs":42,"fats":15,"sugar":0.5,"fiber":3.5,"defaultQty":150},{"id":"frites-four","name":"Frites au four","cal":195,"protein":3.5,"carbs":30,"fats":6.5,"sugar":0.5,"fiber":3,"defaultQty":150},{"id":"pommes-rissolees","name":"Pommes rissolées","cal":195,"protein":2.5,"carbs":27,"fats":8,"sugar":0.5,"fiber":2.5,"defaultQty":150},{"id":"puree-maison","name":"Purée de pomme de terre","cal":88,"protein":2,"carbs":14.6,"fats":2.5,"sugar":1,"fiber":1.4,"defaultQty":200},{"id":"puree-flocons","name":"Purée mousseline","cal":78,"protein":2,"carbs":14,"fats":1.5,"sugar":0.5,"fiber":1.3,"defaultQty":200},{"id":"gratin-dauphinois","name":"Gratin dauphinois","cal":165,"protein":3.5,"carbs":14,"fats":11,"sugar":1.5,"fiber":1.5,"defaultQty":200},{"id":"pommes-noisettes","name":"Pommes noisettes","cal":220,"protein":3,"carbs":32,"fats":9,"sugar":0.5,"fiber":2.5,"defaultQty":150},{"id":"pommes-dauphine","name":"Pommes dauphine","cal":280,"protein":4,"carbs":30,"fats":16,"sugar":0.5,"fiber":2,"defaultQty":150},{"id":"hash-browns","name":"Hash browns","cal":270,"protein":3,"carbs":30,"fats":16,"sugar":0.5,"fiber":2,"defaultQty":100},{"id":"rosti","name":"Rösti","cal":235,"protein":3,"carbs":30,"fats":12,"sugar":0.5,"fiber":2,"defaultQty":150},{"id":"patate-douce","name":"Patate douce cuite","cal":90,"protein":2,"carbs":20,"fats":0.1,"sugar":6,"fiber":3,"defaultQty":200},{"id":"lentilles","name":"Lentilles cuites","cal":116,"protein":9,"carbs":20,"fats":0.4,"sugar":1.8,"fiber":8,"defaultQty":180},{"id":"lentilles-corail","name":"Lentilles corail cuites","cal":115,"protein":7.5,"carbs":19,"fats":0.5,"sugar":1,"fiber":4,"defaultQty":180},{"id":"pois-chiches","name":"Pois chiches cuits","cal":164,"protein":8.9,"carbs":27,"fats":2.6,"sugar":4.8,"fiber":7.6,"defaultQty":150},{"id":"haricots-rouges","name":"Haricots rouges cuits","cal":127,"protein":8.7,"carbs":22,"fats":0.5,"sugar":0.3,"fiber":6.4,"defaultQty":150},{"id":"haricots-blancs","name":"Haricots blancs cuits","cal":110,"protein":8,"carbs":19,"fats":0.6,"sugar":1.5,"fiber":6,"defaultQty":150},{"id":"flageolets","name":"Flageolets cuits","cal":105,"protein":7.5,"carbs":18,"fats":0.5,"sugar":1,"fiber":5.5,"defaultQty":150},{"id":"pois-casses","name":"Pois cassés cuits","cal":118,"protein":8.5,"carbs":21,"fats":0.4,"sugar":2.7,"fiber":8,"defaultQty":150},{"id":"feves","name":"Fèves cuites","cal":110,"protein":8,"carbs":18,"fats":0.6,"sugar":2,"fiber":5.5,"defaultQty":150},{"id":"haricots-coco","name":"Haricots coco cuits","cal":130,"protein":9,"carbs":22,"fats":0.5,"sugar":1.5,"fiber":7,"defaultQty":150},{"id":"soja","name":"Graines de soja","cal":165,"protein":16,"carbs":9,"fats":8,"sugar":3,"fiber":6,"defaultQty":100},{"id":"tofu","name":"Tofu nature","cal":145,"protein":15,"carbs":1.5,"fats":8.5,"sugar":0.6,"fiber":1.4,"defaultQty":100},{"id":"tofu-fume","name":"Tofu fumé","cal":175,"protein":17,"carbs":1,"fats":11,"sugar":0.5,"fiber":1,"defaultQty":100},{"id":"tempeh","name":"Tempeh","cal":195,"protein":19,"carbs":7.5,"fats":11,"sugar":0,"fiber":0,"defaultQty":100},{"id":"seitan","name":"Seitan","cal":150,"protein":25,"carbs":4,"fats":2,"sugar":0,"fiber":0,"defaultQty":100},{"id":"falafel","name":"Falafel","cal":333,"protein":13,"carbs":32,"fats":18,"sugar":4,"fiber":5,"defaultQty":80},{"id":"houmous","name":"Houmous","cal":175,"protein":8,"carbs":14,"fats":10,"sugar":0.5,"fiber":4,"defaultQty":50},{"id":"tapenade","name":"Tapenade","cal":247,"protein":4.4,"carbs":8,"fats":22,"sugar":1,"fiber":4,"defaultQty":30},{"id":"salade-verte","name":"Salade verte","cal":15,"protein":1.4,"carbs":1.5,"fats":0.2,"sugar":0.8,"fiber":1.3,"defaultQty":80},{"id":"laitue","name":"Laitue","cal":13,"protein":1.4,"carbs":1.2,"fats":0.2,"sugar":0.8,"fiber":1.3,"defaultQty":80},{"id":"roquette","name":"Roquette","cal":25,"protein":2.6,"carbs":2.1,"fats":0.7,"sugar":2,"fiber":1.6,"defaultQty":50},{"id":"mache","name":"Mâche","cal":20,"protein":1.8,"carbs":1.6,"fats":0.4,"sugar":0.5,"fiber":1.6,"defaultQty":50},{"id":"endive","name":"Endive","cal":17,"protein":1.1,"carbs":2.5,"fats":0.1,"sugar":1.7,"fiber":3,"defaultQty":100},{"id":"epinards-cuits","name":"Épinards cuits","cal":28,"protein":4,"carbs":1,"fats":0.4,"sugar":0.8,"fiber":3.7,"defaultQty":200},{"id":"epinards-crus","name":"Épinards crus","cal":23,"protein":2.9,"carbs":0.4,"fats":0.4,"sugar":0.4,"fiber":2.2,"defaultQty":100},{"id":"blettes","name":"Blettes cuites","cal":21,"protein":1.9,"carbs":2.1,"fats":0.2,"sugar":0.8,"fiber":2.5,"defaultQty":200},{"id":"tomate","name":"Tomate","cal":18,"protein":0.9,"carbs":3.9,"fats":0.2,"sugar":2.6,"fiber":1.2,"defaultQty":120},{"id":"tomate-cerise","name":"Tomate cerise","cal":20,"protein":1,"carbs":3.9,"fats":0.2,"sugar":2.6,"fiber":1.2,"defaultQty":100},{"id":"concombre","name":"Concombre","cal":16,"protein":0.7,"carbs":3.6,"fats":0.1,"sugar":1.7,"fiber":0.5,"defaultQty":100},{"id":"courgette","name":"Courgette cuite","cal":20,"protein":1.4,"carbs":3.1,"fats":0.4,"sugar":2.2,"fiber":1.1,"defaultQty":200},{"id":"aubergine","name":"Aubergine cuite","cal":35,"protein":0.8,"carbs":8,"fats":0.2,"sugar":3,"fiber":2.5,"defaultQty":200},{"id":"ratatouille","name":"Ratatouille","cal":48,"protein":1.4,"carbs":5,"fats":2.5,"sugar":4,"fiber":1.7,"defaultQty":250},{"id":"carotte","name":"Carotte crue","cal":41,"protein":0.9,"carbs":9.6,"fats":0.2,"sugar":4.7,"fiber":2.8,"defaultQty":100},{"id":"carotte-cuite","name":"Carotte cuite","cal":35,"protein":0.8,"carbs":7.5,"fats":0.2,"sugar":5,"fiber":2.5,"defaultQty":200},{"id":"haricots-verts","name":"Haricots verts cuits","cal":31,"protein":1.8,"carbs":5.5,"fats":0.3,"sugar":2.6,"fiber":3.4,"defaultQty":200},{"id":"petits-pois","name":"Petits pois cuits","cal":84,"protein":5.4,"carbs":12,"fats":0.4,"sugar":5,"fiber":5,"defaultQty":150},{"id":"brocoli","name":"Brocoli cuit","cal":35,"protein":2.4,"carbs":4.5,"fats":0.4,"sugar":1.5,"fiber":3,"defaultQty":200},{"id":"chou-fleur","name":"Chou-fleur cuit","cal":28,"protein":1.8,"carbs":3.6,"fats":0.5,"sugar":2,"fiber":2.3,"defaultQty":200},{"id":"chou-rouge","name":"Chou rouge cru","cal":31,"protein":1.4,"carbs":5.6,"fats":0.2,"sugar":4,"fiber":2.8,"defaultQty":100},{"id":"chou-vert","name":"Chou vert cuit","cal":30,"protein":1.7,"carbs":5,"fats":0.4,"sugar":2,"fiber":3,"defaultQty":200},{"id":"choucroute","name":"Choucroute cuite","cal":22,"protein":1.3,"carbs":4.3,"fats":0.2,"sugar":1.6,"fiber":2.8,"defaultQty":200},{"id":"artichaut","name":"Artichaut cuit","cal":50,"protein":3.4,"carbs":9,"fats":0.4,"sugar":1.6,"fiber":5,"defaultQty":150},{"id":"asperges","name":"Asperges cuites","cal":22,"protein":2.4,"carbs":1.8,"fats":0.3,"sugar":1.5,"fiber":1.8,"defaultQty":150},{"id":"poireau","name":"Poireau cuit","cal":28,"protein":1.4,"carbs":5.4,"fats":0.3,"sugar":2.5,"fiber":2,"defaultQty":150},{"id":"oignon","name":"Oignon cru","cal":36,"protein":1.2,"carbs":7.6,"fats":0.1,"sugar":5,"fiber":1.5,"defaultQty":50},{"id":"oignon-cuit","name":"Oignon cuit","cal":41,"protein":1.2,"carbs":8.7,"fats":0.2,"sugar":6,"fiber":1.5,"defaultQty":80},{"id":"ail","name":"Ail","cal":131,"protein":6,"carbs":27.6,"fats":0.3,"sugar":1,"fiber":5.4,"defaultQty":5},{"id":"echalote","name":"Échalote","cal":75,"protein":2.5,"carbs":16,"fats":0.1,"sugar":7.7,"fiber":3.2,"defaultQty":20},{"id":"ciboulette","name":"Ciboulette","cal":30,"protein":3.3,"carbs":4.4,"fats":0.7,"sugar":1.9,"fiber":2.5,"defaultQty":5},{"id":"persil","name":"Persil","cal":36,"protein":3,"carbs":6,"fats":0.8,"sugar":0.9,"fiber":3.3,"defaultQty":5},{"id":"basilic","name":"Basilic","cal":23,"protein":3.2,"carbs":2.7,"fats":0.6,"sugar":0.3,"fiber":1.6,"defaultQty":5},{"id":"poivron-rouge","name":"Poivron rouge","cal":30,"protein":1,"carbs":6,"fats":0.3,"sugar":4.2,"fiber":2.1,"defaultQty":100},{"id":"poivron-vert","name":"Poivron vert","cal":20,"protein":0.9,"carbs":4.6,"fats":0.2,"sugar":2.4,"fiber":1.7,"defaultQty":100},{"id":"champignons","name":"Champignons de Paris cuits","cal":26,"protein":3,"carbs":3.3,"fats":0.5,"sugar":1.9,"fiber":2,"defaultQty":100},{"id":"cepes","name":"Cèpes","cal":23,"protein":2.6,"carbs":2.9,"fats":0.4,"sugar":1.5,"fiber":2.5,"defaultQty":100},{"id":"girolles","name":"Girolles","cal":21,"protein":2,"carbs":1,"fats":0.5,"sugar":1,"fiber":4,"defaultQty":100},{"id":"truffe","name":"Truffe","cal":78,"protein":6,"carbs":12,"fats":1,"sugar":0,"fiber":12,"defaultQty":5},{"id":"courge","name":"Courge cuite","cal":32,"protein":1,"carbs":7,"fats":0.1,"sugar":4,"fiber":1.4,"defaultQty":200},{"id":"potiron","name":"Potiron / soupe de potiron","cal":28,"protein":1,"carbs":6,"fats":0.1,"sugar":3,"fiber":1.5,"defaultQty":250},{"id":"potimarron","name":"Potimarron cuit","cal":45,"protein":1.4,"carbs":9.5,"fats":0.2,"sugar":4,"fiber":1.5,"defaultQty":200},{"id":"celeri","name":"Céleri-rave cuit","cal":27,"protein":1.5,"carbs":4.5,"fats":0.3,"sugar":2,"fiber":3,"defaultQty":150},{"id":"betterave","name":"Betterave cuite","cal":43,"protein":1.6,"carbs":7.5,"fats":0.2,"sugar":7,"fiber":2.8,"defaultQty":100},{"id":"radis","name":"Radis","cal":20,"protein":0.9,"carbs":2,"fats":0.2,"sugar":1.7,"fiber":1.6,"defaultQty":50},{"id":"navet","name":"Navet cuit","cal":22,"protein":1,"carbs":3.5,"fats":0.2,"sugar":2,"fiber":2,"defaultQty":150},{"id":"topinambour","name":"Topinambour","cal":73,"protein":2,"carbs":16.5,"fats":0.4,"sugar":9.6,"fiber":4.5,"defaultQty":150},{"id":"fenouil","name":"Fenouil cuit","cal":27,"protein":1.2,"carbs":4,"fats":0.5,"sugar":2,"fiber":3,"defaultQty":150},{"id":"avocat","name":"Avocat","cal":160,"protein":2,"carbs":8.5,"fats":14.7,"sugar":0.7,"fiber":6.7,"defaultQty":80},{"id":"guacamole","name":"Guacamole","cal":145,"protein":2,"carbs":8,"fats":13,"sugar":0.7,"fiber":5.5,"defaultQty":50},{"id":"pomme","name":"Pomme","cal":52,"protein":0.3,"carbs":14,"fats":0.2,"sugar":10.4,"fiber":2.4,"defaultQty":150},{"id":"poire","name":"Poire","cal":57,"protein":0.4,"carbs":15,"fats":0.1,"sugar":9.8,"fiber":3,"defaultQty":150},{"id":"banane","name":"Banane","cal":89,"protein":1.1,"carbs":22.8,"fats":0.3,"sugar":12.2,"fiber":2.6,"defaultQty":120},{"id":"orange","name":"Orange","cal":47,"protein":0.9,"carbs":11.8,"fats":0.1,"sugar":9.4,"fiber":2.4,"defaultQty":150},{"id":"clementine","name":"Clémentine","cal":47,"protein":0.9,"carbs":12,"fats":0.2,"sugar":9,"fiber":1.7,"defaultQty":80},{"id":"mandarine","name":"Mandarine","cal":53,"protein":0.8,"carbs":13,"fats":0.3,"sugar":10.5,"fiber":1.8,"defaultQty":80},{"id":"citron","name":"Citron","cal":29,"protein":1.1,"carbs":9,"fats":0.3,"sugar":2.5,"fiber":2.8,"defaultQty":60},{"id":"pamplemousse","name":"Pamplemousse","cal":32,"protein":0.7,"carbs":8,"fats":0.1,"sugar":7,"fiber":1.1,"defaultQty":150},{"id":"kiwi","name":"Kiwi","cal":61,"protein":1.1,"carbs":14.6,"fats":0.5,"sugar":9,"fiber":3,"defaultQty":80},{"id":"ananas","name":"Ananas","cal":50,"protein":0.5,"carbs":13,"fats":0.1,"sugar":10,"fiber":1.4,"defaultQty":100},{"id":"mangue","name":"Mangue","cal":60,"protein":0.8,"carbs":15,"fats":0.4,"sugar":14,"fiber":1.6,"defaultQty":150},{"id":"papaye","name":"Papaye","cal":43,"protein":0.5,"carbs":11,"fats":0.3,"sugar":7.8,"fiber":1.7,"defaultQty":150},{"id":"fraise","name":"Fraises","cal":32,"protein":0.7,"carbs":7.7,"fats":0.3,"sugar":4.9,"fiber":2,"defaultQty":150},{"id":"framboise","name":"Framboises","cal":52,"protein":1.2,"carbs":12,"fats":0.7,"sugar":4.4,"fiber":6.5,"defaultQty":100},{"id":"myrtille","name":"Myrtilles","cal":57,"protein":0.7,"carbs":14,"fats":0.3,"sugar":10,"fiber":2.4,"defaultQty":100},{"id":"mure","name":"Mûres","cal":43,"protein":1.4,"carbs":10,"fats":0.5,"sugar":4.9,"fiber":5.3,"defaultQty":100},{"id":"cassis","name":"Cassis","cal":63,"protein":1.4,"carbs":15,"fats":0.4,"sugar":11,"fiber":4,"defaultQty":100},{"id":"groseille","name":"Groseilles","cal":56,"protein":1.4,"carbs":14,"fats":0.2,"sugar":7.4,"fiber":4.3,"defaultQty":100},{"id":"cerise","name":"Cerises","cal":63,"protein":1,"carbs":16,"fats":0.2,"sugar":13,"fiber":2.1,"defaultQty":100},{"id":"raisin","name":"Raisin","cal":69,"protein":0.7,"carbs":18,"fats":0.2,"sugar":16,"fiber":0.9,"defaultQty":100},{"id":"peche","name":"Pêche","cal":39,"protein":0.9,"carbs":10,"fats":0.3,"sugar":8.4,"fiber":1.5,"defaultQty":150},{"id":"nectarine","name":"Nectarine","cal":44,"protein":1.1,"carbs":11,"fats":0.3,"sugar":8.4,"fiber":1.7,"defaultQty":150},{"id":"abricot","name":"Abricot","cal":48,"protein":1.4,"carbs":11,"fats":0.4,"sugar":9,"fiber":2,"defaultQty":100},{"id":"prune","name":"Prune","cal":46,"protein":0.7,"carbs":11,"fats":0.3,"sugar":9.9,"fiber":1.4,"defaultQty":100},{"id":"figue","name":"Figue fraîche","cal":74,"protein":0.8,"carbs":19,"fats":0.3,"sugar":16,"fiber":2.9,"defaultQty":80},{"id":"datte","name":"Datte","cal":282,"protein":2,"carbs":75,"fats":0.4,"sugar":64,"fiber":8,"defaultQty":30},{"id":"pruneau","name":"Pruneaux","cal":240,"protein":2.2,"carbs":64,"fats":0.4,"sugar":38,"fiber":7,"defaultQty":30},{"id":"raisin-sec","name":"Raisins secs","cal":299,"protein":3.1,"carbs":79,"fats":0.5,"sugar":59,"fiber":3.7,"defaultQty":30},{"id":"abricot-sec","name":"Abricots secs","cal":241,"protein":3.4,"carbs":63,"fats":0.5,"sugar":53,"fiber":7.3,"defaultQty":30},{"id":"figue-seche","name":"Figues sèches","cal":250,"protein":3.3,"carbs":64,"fats":1,"sugar":48,"fiber":9.8,"defaultQty":30},{"id":"noix-de-coco","name":"Noix de coco","cal":354,"protein":3.3,"carbs":15,"fats":33.5,"sugar":6.2,"fiber":9,"defaultQty":30},{"id":"pasteque","name":"Pastèque","cal":30,"protein":0.6,"carbs":7.5,"fats":0.2,"sugar":6.2,"fiber":0.4,"defaultQty":200},{"id":"melon","name":"Melon","cal":34,"protein":0.8,"carbs":8,"fats":0.2,"sugar":7.9,"fiber":0.9,"defaultQty":200},{"id":"grenade","name":"Grenade","cal":83,"protein":1.7,"carbs":19,"fats":1.2,"sugar":14,"fiber":4,"defaultQty":100},{"id":"litchi","name":"Litchi","cal":66,"protein":0.8,"carbs":16.5,"fats":0.4,"sugar":15,"fiber":1.3,"defaultQty":100},{"id":"amande","name":"Amandes","cal":579,"protein":21,"carbs":22,"fats":50,"sugar":4.4,"fiber":12.5,"defaultQty":25},{"id":"noix","name":"Noix","cal":654,"protein":15,"carbs":14,"fats":65,"sugar":2.6,"fiber":6.7,"defaultQty":25},{"id":"noisette","name":"Noisettes","cal":628,"protein":15,"carbs":17,"fats":61,"sugar":4.3,"fiber":9.7,"defaultQty":25},{"id":"noix-cajou","name":"Noix de cajou","cal":553,"protein":18,"carbs":30,"fats":44,"sugar":5.9,"fiber":3.3,"defaultQty":25},{"id":"noix-pecan","name":"Noix de pécan","cal":691,"protein":9,"carbs":14,"fats":72,"sugar":4,"fiber":9.6,"defaultQty":25},{"id":"pistache","name":"Pistaches","cal":562,"protein":21,"carbs":28,"fats":45,"sugar":7.7,"fiber":10.3,"defaultQty":25},{"id":"pignon","name":"Pignons de pin","cal":673,"protein":13.7,"carbs":13,"fats":68,"sugar":3.6,"fiber":3.7,"defaultQty":20},{"id":"graine-tournesol","name":"Graines de tournesol","cal":584,"protein":21,"carbs":20,"fats":51,"sugar":2.6,"fiber":8.6,"defaultQty":20},{"id":"graine-courge","name":"Graines de courge","cal":559,"protein":30,"carbs":11,"fats":49,"sugar":1.4,"fiber":6,"defaultQty":20},{"id":"graine-chia","name":"Graines de chia","cal":486,"protein":17,"carbs":42,"fats":31,"sugar":0,"fiber":34,"defaultQty":15},{"id":"graine-lin","name":"Graines de lin","cal":534,"protein":18,"carbs":29,"fats":42,"sugar":1.6,"fiber":27,"defaultQty":15},{"id":"graine-sesame","name":"Graines de sésame","cal":573,"protein":18,"carbs":23,"fats":50,"sugar":0.3,"fiber":12,"defaultQty":10},{"id":"cacahuete","name":"Cacahuètes","cal":567,"protein":26,"carbs":16,"fats":49,"sugar":4,"fiber":8.5,"defaultQty":25},{"id":"beurre-cacahuete","name":"Beurre de cacahuète","cal":588,"protein":25,"carbs":20,"fats":50,"sugar":9,"fiber":6,"defaultQty":20},{"id":"lait-entier","name":"Lait entier","cal":64,"protein":3.2,"carbs":4.7,"fats":3.6,"sugar":4.7,"fiber":0,"defaultQty":200,"unit":"ml"},{"id":"lait-demi-ecreme","name":"Lait demi-écrémé","cal":47,"protein":3.4,"carbs":4.8,"fats":1.6,"sugar":4.8,"fiber":0,"defaultQty":200,"unit":"ml"},{"id":"lait-ecreme","name":"Lait écrémé","cal":35,"protein":3.5,"carbs":5,"fats":0.2,"sugar":5,"fiber":0,"defaultQty":200,"unit":"ml"},{"id":"lait-amande","name":"Lait d'amande","cal":24,"protein":0.5,"carbs":3,"fats":1.1,"sugar":3,"fiber":0.3,"defaultQty":200,"unit":"ml"},{"id":"lait-soja","name":"Lait de soja","cal":39,"protein":3.5,"carbs":1.5,"fats":1.9,"sugar":1,"fiber":0.5,"defaultQty":200,"unit":"ml"},{"id":"lait-avoine","name":"Lait d'avoine","cal":47,"protein":1,"carbs":7,"fats":1.5,"sugar":4,"fiber":0.8,"defaultQty":200,"unit":"ml"},{"id":"lait-coco","name":"Lait de coco","cal":197,"protein":2,"carbs":3,"fats":20,"sugar":3,"fiber":0.7,"defaultQty":100,"unit":"ml"},{"id":"creme-fraiche","name":"Crème fraîche 30%","cal":295,"protein":2.5,"carbs":3,"fats":30,"sugar":3,"fiber":0,"defaultQty":30},{"id":"creme-15","name":"Crème allégée 15%","cal":165,"protein":3,"carbs":4,"fats":15,"sugar":4,"fiber":0,"defaultQty":30},{"id":"creme-fluide","name":"Crème liquide 30%","cal":295,"protein":2.5,"carbs":3,"fats":30,"sugar":3,"fiber":0,"defaultQty":30},{"id":"yaourt-nature","name":"Yaourt nature","cal":56,"protein":4.1,"carbs":4.7,"fats":2.5,"sugar":4.7,"fiber":0,"defaultQty":125},{"id":"yaourt-grec","name":"Yaourt grec","cal":97,"protein":9,"carbs":3.6,"fats":5,"sugar":3.6,"fiber":0,"defaultQty":150},{"id":"yaourt-grec-0","name":"Yaourt grec 0%","cal":56,"protein":10,"carbs":3.6,"fats":0.2,"sugar":3.6,"fiber":0,"defaultQty":150},{"id":"yaourt-fruit","name":"Yaourt aux fruits","cal":95,"protein":3.7,"carbs":14,"fats":2.5,"sugar":13,"fiber":0.4,"defaultQty":125},{"id":"yaourt-vanille","name":"Yaourt vanille","cal":90,"protein":3.5,"carbs":14,"fats":2.5,"sugar":13,"fiber":0,"defaultQty":125},{"id":"skyr","name":"Skyr nature","cal":63,"protein":11,"carbs":4,"fats":0.2,"sugar":4,"fiber":0,"defaultQty":150},{"id":"skyr-fruit","name":"Skyr aux fruits","cal":75,"protein":9,"carbs":9,"fats":0.2,"sugar":8,"fiber":0.5,"defaultQty":150},{"id":"fromage-blanc-0","name":"Fromage blanc 0%","cal":46,"protein":8,"carbs":3.8,"fats":0.2,"sugar":3.8,"fiber":0,"defaultQty":150},{"id":"fromage-blanc-3","name":"Fromage blanc 3%","cal":78,"protein":7.5,"carbs":4,"fats":3,"sugar":4,"fiber":0,"defaultQty":150},{"id":"fromage-blanc-20","name":"Fromage blanc 20%","cal":116,"protein":6.8,"carbs":3.7,"fats":8,"sugar":3.7,"fiber":0,"defaultQty":150},{"id":"petit-suisse","name":"Petit-suisse 0%","cal":70,"protein":11,"carbs":4,"fats":0.2,"sugar":4,"fiber":0,"defaultQty":60},{"id":"petit-suisse-9","name":"Petit-suisse 9%","cal":134,"protein":8,"carbs":3.5,"fats":9,"sugar":3.5,"fiber":0,"defaultQty":60},{"id":"kefir","name":"Kéfir","cal":41,"protein":3.5,"carbs":4,"fats":1,"sugar":4,"fiber":0,"defaultQty":200,"unit":"ml"},{"id":"camembert","name":"Camembert","cal":264,"protein":20,"carbs":0.5,"fats":21,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"brie","name":"Brie","cal":334,"protein":20,"carbs":0.5,"fats":28,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"coulommiers","name":"Coulommiers","cal":290,"protein":20,"carbs":0.5,"fats":23,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"munster","name":"Munster","cal":350,"protein":22,"carbs":0.5,"fats":29,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"livarot","name":"Livarot","cal":290,"protein":23,"carbs":0.5,"fats":22,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"pont-eveque","name":"Pont-l'Évêque","cal":305,"protein":22,"carbs":1,"fats":24,"sugar":1,"fiber":0,"defaultQty":30},{"id":"emmental","name":"Emmental","cal":384,"protein":28,"carbs":0.5,"fats":30,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"comte","name":"Comté","cal":416,"protein":27,"carbs":0.5,"fats":34,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"gruyere","name":"Gruyère","cal":415,"protein":27,"carbs":0.5,"fats":34,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"beaufort","name":"Beaufort","cal":401,"protein":26,"carbs":0.5,"fats":33,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"cantal","name":"Cantal","cal":391,"protein":24,"carbs":0.5,"fats":33,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"salers","name":"Salers","cal":391,"protein":24,"carbs":0.5,"fats":33,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"reblochon","name":"Reblochon","cal":339,"protein":21,"carbs":0.5,"fats":28,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"morbier","name":"Morbier","cal":347,"protein":22,"carbs":0.5,"fats":28,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"tomme-savoie","name":"Tomme de Savoie","cal":287,"protein":21,"carbs":0.5,"fats":22,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"raclette","name":"Raclette","cal":360,"protein":23,"carbs":0.5,"fats":30,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"mozzarella","name":"Mozzarella","cal":248,"protein":18,"carbs":1,"fats":19,"sugar":1,"fiber":0,"defaultQty":30},{"id":"burrata","name":"Burrata","cal":313,"protein":13,"carbs":1,"fats":28,"sugar":1,"fiber":0,"defaultQty":50},{"id":"ricotta","name":"Ricotta","cal":174,"protein":11,"carbs":3,"fats":13,"sugar":0.3,"fiber":0,"defaultQty":50},{"id":"mascarpone","name":"Mascarpone","cal":412,"protein":4.8,"carbs":3.6,"fats":42,"sugar":3.6,"fiber":0,"defaultQty":30},{"id":"parmesan","name":"Parmesan","cal":392,"protein":36,"carbs":0.5,"fats":28,"sugar":0.5,"fiber":0,"defaultQty":20},{"id":"grana-padano","name":"Grana Padano","cal":384,"protein":33,"carbs":0.5,"fats":28,"sugar":0.5,"fiber":0,"defaultQty":20},{"id":"pecorino","name":"Pecorino","cal":387,"protein":26,"carbs":0.5,"fats":32,"sugar":0.5,"fiber":0,"defaultQty":20},{"id":"gorgonzola","name":"Gorgonzola","cal":353,"protein":19,"carbs":0.5,"fats":30,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"roquefort","name":"Roquefort","cal":369,"protein":22,"carbs":1,"fats":31,"sugar":1,"fiber":0,"defaultQty":30},{"id":"bleu-auvergne","name":"Bleu d'Auvergne","cal":360,"protein":21,"carbs":0.5,"fats":30,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"fourme-ambert","name":"Fourme d'Ambert","cal":348,"protein":21,"carbs":0.5,"fats":29,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"chevre-frais","name":"Chèvre frais","cal":207,"protein":15,"carbs":1,"fats":16,"sugar":1,"fiber":0,"defaultQty":30},{"id":"chevre-buchette","name":"Bûchette de chèvre","cal":285,"protein":20,"carbs":0.5,"fats":23,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"crottin-chavignol","name":"Crottin de Chavignol","cal":360,"protein":24,"carbs":0.5,"fats":29,"sugar":0.5,"fiber":0,"defaultQty":30},{"id":"feta","name":"Feta","cal":264,"protein":14,"carbs":4,"fats":21,"sugar":4,"fiber":0,"defaultQty":30},{"id":"halloumi","name":"Halloumi","cal":321,"protein":22,"carbs":2,"fats":25,"sugar":2,"fiber":0,"defaultQty":50},{"id":"kiri","name":"Kiri / Vache qui rit","cal":270,"protein":9,"carbs":3,"fats":24,"sugar":3,"fiber":0,"defaultQty":20},{"id":"philadelphia","name":"Philadelphia","cal":230,"protein":6,"carbs":4,"fats":22,"sugar":3,"fiber":0,"defaultQty":30},{"id":"st-moret","name":"St Môret","cal":240,"protein":9,"carbs":3,"fats":22,"sugar":3,"fiber":0,"defaultQty":30},{"id":"boursin","name":"Boursin","cal":408,"protein":7,"carbs":3,"fats":41,"sugar":3,"fiber":0,"defaultQty":30},{"id":"cancoillotte","name":"Cancoillotte","cal":130,"protein":14,"carbs":1,"fats":8,"sugar":1,"fiber":0,"defaultQty":30},{"id":"cantadou","name":"Cantadou","cal":350,"protein":9,"carbs":3,"fats":33,"sugar":3,"fiber":0,"defaultQty":30},{"id":"baguette","name":"Baguette","cal":271,"protein":9,"carbs":55,"fats":1.3,"sugar":2,"fiber":2.7,"defaultQty":60},{"id":"pain-blanc","name":"Pain blanc","cal":250,"protein":7.5,"carbs":49,"fats":1,"sugar":3,"fiber":3,"defaultQty":60},{"id":"pain-complet","name":"Pain complet","cal":247,"protein":13,"carbs":41,"fats":4.2,"sugar":5.5,"fiber":7,"defaultQty":60},{"id":"pain-cereales","name":"Pain aux céréales","cal":268,"protein":9,"carbs":45,"fats":5,"sugar":4,"fiber":7,"defaultQty":60},{"id":"pain-seigle","name":"Pain de seigle","cal":247,"protein":7,"carbs":50,"fats":1.5,"sugar":3,"fiber":8.5,"defaultQty":60},{"id":"pain-mie","name":"Pain de mie","cal":280,"protein":8,"carbs":50,"fats":5,"sugar":5,"fiber":3,"defaultQty":60},{"id":"pain-mie-complet","name":"Pain de mie complet","cal":250,"protein":9,"carbs":42,"fats":5,"sugar":4,"fiber":6.5,"defaultQty":60},{"id":"pain-suedois","name":"Pain suédois","cal":380,"protein":11,"carbs":70,"fats":5,"sugar":3,"fiber":9,"defaultQty":30},{"id":"biscotte","name":"Biscotte","cal":408,"protein":12,"carbs":75,"fats":7,"sugar":6,"fiber":4,"defaultQty":20},{"id":"croissant","name":"Croissant","cal":406,"protein":8,"carbs":47,"fats":21,"sugar":6,"fiber":2,"defaultQty":50},{"id":"pain-chocolat","name":"Pain au chocolat","cal":414,"protein":7.5,"carbs":47,"fats":22,"sugar":13,"fiber":2,"defaultQty":70},{"id":"brioche","name":"Brioche","cal":365,"protein":8,"carbs":52,"fats":14,"sugar":14,"fiber":1.5,"defaultQty":50},{"id":"chausson-pomme","name":"Chausson aux pommes","cal":360,"protein":4,"carbs":45,"fats":18,"sugar":15,"fiber":2,"defaultQty":100},{"id":"chouquette","name":"Chouquette","cal":380,"protein":8,"carbs":45,"fats":18,"sugar":12,"fiber":1,"defaultQty":30},{"id":"madeleine","name":"Madeleine","cal":415,"protein":6,"carbs":50,"fats":21,"sugar":26,"fiber":1,"defaultQty":25},{"id":"financier","name":"Financier","cal":460,"protein":8,"carbs":45,"fats":27,"sugar":30,"fiber":1,"defaultQty":30},{"id":"eclair-chocolat","name":"Éclair au chocolat","cal":270,"protein":5,"carbs":30,"fats":14,"sugar":18,"fiber":1,"defaultQty":80},{"id":"religieuse","name":"Religieuse au chocolat","cal":290,"protein":5,"carbs":33,"fats":15,"sugar":22,"fiber":1,"defaultQty":80},{"id":"paris-brest","name":"Paris-Brest","cal":380,"protein":7,"carbs":30,"fats":26,"sugar":18,"fiber":1,"defaultQty":100},{"id":"millefeuille","name":"Mille-feuille","cal":360,"protein":4,"carbs":35,"fats":22,"sugar":18,"fiber":1,"defaultQty":100},{"id":"tarte-pomme","name":"Tarte aux pommes","cal":220,"protein":3,"carbs":32,"fats":9,"sugar":18,"fiber":2,"defaultQty":120},{"id":"tarte-citron","name":"Tarte au citron","cal":350,"protein":5,"carbs":45,"fats":17,"sugar":28,"fiber":1,"defaultQty":100},{"id":"tarte-fraise","name":"Tarte aux fraises","cal":270,"protein":4,"carbs":40,"fats":11,"sugar":25,"fiber":2,"defaultQty":120},{"id":"flan-patissier","name":"Flan pâtissier","cal":195,"protein":5,"carbs":28,"fats":7,"sugar":20,"fiber":0.5,"defaultQty":100},{"id":"crepe-sucree","name":"Crêpe sucrée","cal":200,"protein":5,"carbs":28,"fats":7,"sugar":7,"fiber":1,"defaultQty":80},{"id":"galette-bretonne","name":"Galette de blé noir","cal":130,"protein":5,"carbs":22,"fats":2,"sugar":1,"fiber":3,"defaultQty":100},{"id":"gaufre","name":"Gaufre","cal":305,"protein":6,"carbs":38,"fats":14,"sugar":12,"fiber":1,"defaultQty":80},{"id":"biscuit-petit-beurre","name":"Petit beurre","cal":444,"protein":7,"carbs":73,"fats":13,"sugar":23,"fiber":2,"defaultQty":25},{"id":"biscuit-speculoos","name":"Spéculoos","cal":480,"protein":6,"carbs":71,"fats":19,"sugar":38,"fiber":2,"defaultQty":25},{"id":"biscuit-sable","name":"Biscuit sablé","cal":487,"protein":6,"carbs":68,"fats":21,"sugar":26,"fiber":2,"defaultQty":25},{"id":"biscuit-palmier","name":"Palmier","cal":510,"protein":6,"carbs":60,"fats":28,"sugar":26,"fiber":1,"defaultQty":25},{"id":"biscuit-langue-chat","name":"Langue de chat","cal":470,"protein":6,"carbs":70,"fats":18,"sugar":30,"fiber":1,"defaultQty":25},{"id":"biscuit-cookie","name":"Cookie","cal":480,"protein":6,"carbs":65,"fats":22,"sugar":38,"fiber":2,"defaultQty":30},{"id":"biscuit-bn","name":"BN chocolat","cal":460,"protein":6,"carbs":70,"fats":17,"sugar":30,"fiber":2,"defaultQty":25},{"id":"biscuit-pim","name":"Pim's","cal":415,"protein":4,"carbs":70,"fats":13,"sugar":47,"fiber":2,"defaultQty":25},{"id":"biscuit-prince","name":"Prince chocolat","cal":470,"protein":6,"carbs":70,"fats":18,"sugar":30,"fiber":3,"defaultQty":25},{"id":"biscuit-petit-ecolier","name":"Petit Écolier","cal":490,"protein":6,"carbs":65,"fats":22,"sugar":35,"fiber":2,"defaultQty":25},{"id":"eau","name":"Eau","cal":0,"protein":0,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"eau-gazeuse","name":"Eau gazeuse","cal":0,"protein":0,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"the-nature","name":"Thé nature","cal":1,"protein":0,"carbs":0.3,"fats":0,"sugar":0,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"infusion","name":"Infusion / tisane","cal":1,"protein":0,"carbs":0.3,"fats":0,"sugar":0,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"cafe-noir","name":"Café noir","cal":2,"protein":0.1,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":200,"unit":"ml"},{"id":"cafe-au-lait","name":"Café au lait","cal":25,"protein":1.7,"carbs":2.4,"fats":0.8,"sugar":2.4,"fiber":0,"defaultQty":200,"unit":"ml"},{"id":"cappuccino","name":"Cappuccino","cal":40,"protein":2,"carbs":4,"fats":1.5,"sugar":4,"fiber":0,"defaultQty":200,"unit":"ml"},{"id":"latte","name":"Café latte","cal":55,"protein":3,"carbs":5,"fats":2,"sugar":5,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"chocolat-chaud","name":"Chocolat chaud","cal":80,"protein":3,"carbs":12,"fats":2.5,"sugar":11,"fiber":0.5,"defaultQty":200,"unit":"ml"},{"id":"jus-orange","name":"Jus d'orange","cal":45,"protein":0.7,"carbs":10.4,"fats":0.2,"sugar":8.4,"fiber":0.2,"defaultQty":200,"unit":"ml"},{"id":"jus-pomme","name":"Jus de pomme","cal":46,"protein":0.1,"carbs":11,"fats":0.1,"sugar":10,"fiber":0.2,"defaultQty":200,"unit":"ml"},{"id":"jus-raisin","name":"Jus de raisin","cal":67,"protein":0.4,"carbs":16,"fats":0.1,"sugar":16,"fiber":0.1,"defaultQty":200,"unit":"ml"},{"id":"jus-multifruits","name":"Jus multifruits","cal":47,"protein":0.4,"carbs":11,"fats":0.1,"sugar":10,"fiber":0.3,"defaultQty":200,"unit":"ml"},{"id":"jus-tomate","name":"Jus de tomate","cal":18,"protein":0.7,"carbs":3.7,"fats":0.2,"sugar":3,"fiber":0.4,"defaultQty":200,"unit":"ml"},{"id":"smoothie","name":"Smoothie aux fruits","cal":60,"protein":0.8,"carbs":13,"fats":0.5,"sugar":11,"fiber":1.5,"defaultQty":250,"unit":"ml"},{"id":"coca-cola","name":"Coca-Cola","cal":42,"protein":0,"carbs":10.6,"fats":0,"sugar":10.6,"fiber":0,"defaultQty":330,"unit":"ml"},{"id":"coca-zero","name":"Coca-Cola Zero","cal":0.3,"protein":0,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":330,"unit":"ml"},{"id":"orangina","name":"Orangina","cal":44,"protein":0,"carbs":10.5,"fats":0,"sugar":10.5,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"ice-tea","name":"Ice tea pêche","cal":28,"protein":0,"carbs":7,"fats":0,"sugar":6.7,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"limonade","name":"Limonade","cal":36,"protein":0,"carbs":9,"fats":0,"sugar":8.7,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"redbull","name":"Red Bull","cal":45,"protein":0,"carbs":11,"fats":0,"sugar":11,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"biere","name":"Bière blonde 5°","cal":43,"protein":0.5,"carbs":3.5,"fats":0,"sugar":0,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"biere-brune","name":"Bière brune","cal":50,"protein":0.6,"carbs":4,"fats":0,"sugar":0,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"biere-sans-alcool","name":"Bière sans alcool","cal":25,"protein":0.4,"carbs":5,"fats":0,"sugar":1.5,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"vin-rouge","name":"Vin rouge","cal":85,"protein":0.1,"carbs":2.6,"fats":0,"sugar":0.6,"fiber":0,"defaultQty":125,"unit":"ml"},{"id":"vin-blanc","name":"Vin blanc","cal":82,"protein":0.1,"carbs":2.6,"fats":0,"sugar":1.5,"fiber":0,"defaultQty":125,"unit":"ml"},{"id":"vin-rose","name":"Vin rosé","cal":83,"protein":0.1,"carbs":2.5,"fats":0,"sugar":1.5,"fiber":0,"defaultQty":125,"unit":"ml"},{"id":"champagne","name":"Champagne","cal":80,"protein":0.2,"carbs":1.4,"fats":0,"sugar":1.4,"fiber":0,"defaultQty":125,"unit":"ml"},{"id":"cidre","name":"Cidre","cal":40,"protein":0.1,"carbs":4,"fats":0,"sugar":3.5,"fiber":0,"defaultQty":250,"unit":"ml"},{"id":"whisky","name":"Whisky","cal":250,"protein":0,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":30,"unit":"ml"},{"id":"vodka","name":"Vodka","cal":235,"protein":0,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":30,"unit":"ml"},{"id":"rhum","name":"Rhum","cal":240,"protein":0,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":30,"unit":"ml"},{"id":"gin","name":"Gin","cal":260,"protein":0,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":30,"unit":"ml"},{"id":"ricard","name":"Pastis / Ricard","cal":280,"protein":0,"carbs":1,"fats":0,"sugar":1,"fiber":0,"defaultQty":25,"unit":"ml"},{"id":"mojito","name":"Mojito","cal":105,"protein":0,"carbs":13,"fats":0,"sugar":12,"fiber":0,"defaultQty":200,"unit":"ml"},{"id":"pina-colada","name":"Piña Colada","cal":200,"protein":1,"carbs":25,"fats":8,"sugar":22,"fiber":0.5,"defaultQty":200,"unit":"ml"},{"id":"huile-olive","name":"Huile d'olive","cal":884,"protein":0,"carbs":0,"fats":100,"sugar":0,"fiber":0,"defaultQty":10},{"id":"huile-tournesol","name":"Huile de tournesol","cal":884,"protein":0,"carbs":0,"fats":100,"sugar":0,"fiber":0,"defaultQty":10},{"id":"huile-colza","name":"Huile de colza","cal":884,"protein":0,"carbs":0,"fats":100,"sugar":0,"fiber":0,"defaultQty":10},{"id":"huile-arachide","name":"Huile d'arachide","cal":884,"protein":0,"carbs":0,"fats":100,"sugar":0,"fiber":0,"defaultQty":10},{"id":"huile-noix","name":"Huile de noix","cal":884,"protein":0,"carbs":0,"fats":100,"sugar":0,"fiber":0,"defaultQty":10},{"id":"huile-sesame","name":"Huile de sésame","cal":884,"protein":0,"carbs":0,"fats":100,"sugar":0,"fiber":0,"defaultQty":10},{"id":"huile-coco","name":"Huile de coco","cal":862,"protein":0,"carbs":0,"fats":99,"sugar":0,"fiber":0,"defaultQty":10},{"id":"beurre","name":"Beurre doux","cal":717,"protein":0.9,"carbs":0.1,"fats":81,"sugar":0.1,"fiber":0,"defaultQty":10},{"id":"beurre-demi-sel","name":"Beurre demi-sel","cal":750,"protein":0.7,"carbs":0.5,"fats":82,"sugar":0.5,"fiber":0,"defaultQty":10},{"id":"margarine","name":"Margarine","cal":645,"protein":0.4,"carbs":0.7,"fats":71,"sugar":0.7,"fiber":0,"defaultQty":10},{"id":"saindoux","name":"Saindoux","cal":891,"protein":0,"carbs":0,"fats":99,"sugar":0,"fiber":0,"defaultQty":10},{"id":"graisse-canard","name":"Graisse de canard","cal":893,"protein":0,"carbs":0,"fats":99.5,"sugar":0,"fiber":0,"defaultQty":10},{"id":"ketchup","name":"Ketchup","cal":100,"protein":1.2,"carbs":23,"fats":0.5,"sugar":22,"fiber":0.5,"defaultQty":15},{"id":"mayonnaise","name":"Mayonnaise","cal":720,"protein":1.1,"carbs":1.5,"fats":78,"sugar":1.5,"fiber":0,"defaultQty":15},{"id":"mayo-allegee","name":"Mayonnaise allégée","cal":280,"protein":0.5,"carbs":12,"fats":25,"sugar":9,"fiber":0,"defaultQty":15},{"id":"moutarde","name":"Moutarde forte","cal":110,"protein":6,"carbs":5,"fats":7,"sugar":1,"fiber":4,"defaultQty":10},{"id":"moutarde-douce","name":"Moutarde à l'ancienne","cal":130,"protein":6,"carbs":6,"fats":8,"sugar":4,"fiber":4,"defaultQty":10},{"id":"vinaigre","name":"Vinaigre","cal":19,"protein":0.3,"carbs":0.6,"fats":0,"sugar":0.4,"fiber":0,"defaultQty":10,"unit":"ml"},{"id":"vinaigrette","name":"Vinaigrette classique","cal":450,"protein":0.6,"carbs":4,"fats":48,"sugar":4,"fiber":0,"defaultQty":15},{"id":"sauce-tomate","name":"Sauce tomate","cal":49,"protein":1.5,"carbs":8,"fats":1,"sugar":5,"fiber":1.5,"defaultQty":100},{"id":"sauce-bolognaise","name":"Sauce bolognaise","cal":95,"protein":4.5,"carbs":8,"fats":5,"sugar":5,"fiber":1,"defaultQty":100},{"id":"sauce-soja","name":"Sauce soja","cal":60,"protein":9,"carbs":5,"fats":0,"sugar":1,"fiber":1,"defaultQty":10,"unit":"ml"},{"id":"nuoc-mam","name":"Nuoc-mâm","cal":55,"protein":11,"carbs":1,"fats":0,"sugar":1,"fiber":0,"defaultQty":10,"unit":"ml"},{"id":"sauce-curry","name":"Sauce curry","cal":110,"protein":2,"carbs":6,"fats":8,"sugar":4,"fiber":1.5,"defaultQty":30},{"id":"sauce-bechamel","name":"Sauce béchamel","cal":130,"protein":4,"carbs":8,"fats":9,"sugar":5,"fiber":0,"defaultQty":50},{"id":"sauce-hollandaise","name":"Sauce hollandaise","cal":525,"protein":2,"carbs":1,"fats":56,"sugar":1,"fiber":0,"defaultQty":30},{"id":"sauce-bearnaise","name":"Sauce béarnaise","cal":470,"protein":1.5,"carbs":1.5,"fats":50,"sugar":1.5,"fiber":0,"defaultQty":30},{"id":"aioli","name":"Aïoli","cal":720,"protein":1.5,"carbs":2,"fats":78,"sugar":2,"fiber":0,"defaultQty":15},{"id":"pesto","name":"Pesto","cal":460,"protein":6,"carbs":4,"fats":47,"sugar":1.5,"fiber":1.5,"defaultQty":20},{"id":"tabasco","name":"Tabasco","cal":13,"protein":1,"carbs":1,"fats":0,"sugar":0,"fiber":0,"defaultQty":1,"unit":"ml"},{"id":"harissa","name":"Harissa","cal":70,"protein":3,"carbs":6,"fats":4,"sugar":4,"fiber":4,"defaultQty":10},{"id":"sriracha","name":"Sriracha","cal":90,"protein":1.5,"carbs":18,"fats":1,"sugar":14,"fiber":2,"defaultQty":10},{"id":"worcestershire","name":"Sauce Worcestershire","cal":78,"protein":0,"carbs":19,"fats":0,"sugar":14,"fiber":0,"defaultQty":10,"unit":"ml"},{"id":"sel","name":"Sel","cal":0,"protein":0,"carbs":0,"fats":0,"sugar":0,"fiber":0,"defaultQty":1},{"id":"poivre","name":"Poivre","cal":251,"protein":10,"carbs":64,"fats":3,"sugar":0.6,"fiber":25,"defaultQty":1},{"id":"sucre","name":"Sucre blanc","cal":400,"protein":0,"carbs":99.8,"fats":0,"sugar":99.8,"fiber":0,"defaultQty":5},{"id":"sucre-roux","name":"Sucre roux","cal":396,"protein":0,"carbs":99,"fats":0,"sugar":99,"fiber":0,"defaultQty":5},{"id":"miel","name":"Miel","cal":327,"protein":0.4,"carbs":80,"fats":0,"sugar":79,"fiber":0.2,"defaultQty":20},{"id":"sirop-erable","name":"Sirop d'érable","cal":264,"protein":0,"carbs":67,"fats":0.1,"sugar":60,"fiber":0,"defaultQty":20},{"id":"sirop-agave","name":"Sirop d'agave","cal":310,"protein":0.1,"carbs":76,"fats":0.5,"sugar":68,"fiber":0.2,"defaultQty":20},{"id":"confiture","name":"Confiture","cal":250,"protein":0.4,"carbs":60,"fats":0.1,"sugar":60,"fiber":1,"defaultQty":20},{"id":"pizza-margherita","name":"Pizza margherita","cal":266,"protein":11,"carbs":33,"fats":10,"sugar":3.6,"fiber":2.3,"defaultQty":150},{"id":"pizza-4-fromages","name":"Pizza 4 fromages","cal":290,"protein":14,"carbs":30,"fats":13,"sugar":3,"fiber":2,"defaultQty":150},{"id":"pizza-reine","name":"Pizza reine","cal":250,"protein":13,"carbs":30,"fats":9,"sugar":3,"fiber":2,"defaultQty":150},{"id":"pizza-chevre-miel","name":"Pizza chèvre-miel","cal":280,"protein":12,"carbs":32,"fats":12,"sugar":8,"fiber":2,"defaultQty":150},{"id":"pizza-pepperoni","name":"Pizza pepperoni","cal":295,"protein":13,"carbs":28,"fats":14,"sugar":3,"fiber":2,"defaultQty":150},{"id":"burger-classique","name":"Burger classique","cal":295,"protein":17,"carbs":24,"fats":14,"sugar":5,"fiber":1.5,"defaultQty":200},{"id":"cheeseburger","name":"Cheeseburger","cal":310,"protein":17,"carbs":25,"fats":15,"sugar":6,"fiber":1.5,"defaultQty":200},{"id":"big-mac","name":"Big Mac type","cal":250,"protein":13,"carbs":21,"fats":12,"sugar":5,"fiber":1.5,"defaultQty":220},{"id":"hot-dog","name":"Hot-dog","cal":250,"protein":10,"carbs":22,"fats":13,"sugar":4,"fiber":1.5,"defaultQty":150},{"id":"kebab","name":"Kebab","cal":220,"protein":12,"carbs":18,"fats":10,"sugar":2,"fiber":2,"defaultQty":300},{"id":"nuggets","name":"Nuggets de poulet","cal":290,"protein":15,"carbs":17,"fats":18,"sugar":0.5,"fiber":1,"defaultQty":100},{"id":"wrap-poulet","name":"Wrap au poulet","cal":220,"protein":13,"carbs":22,"fats":9,"sugar":3,"fiber":2,"defaultQty":200},{"id":"sandwich-jambon-beurre","name":"Sandwich jambon-beurre","cal":240,"protein":10,"carbs":33,"fats":7.5,"sugar":2,"fiber":1.8,"defaultQty":180},{"id":"sandwich-thon","name":"Sandwich au thon","cal":220,"protein":11,"carbs":26,"fats":8,"sugar":2,"fiber":1.5,"defaultQty":180},{"id":"sandwich-poulet-crudites","name":"Sandwich poulet crudités","cal":200,"protein":12,"carbs":24,"fats":6,"sugar":2.5,"fiber":2,"defaultQty":200},{"id":"sandwich-club","name":"Club sandwich","cal":270,"protein":13,"carbs":25,"fats":13,"sugar":3,"fiber":1.5,"defaultQty":200},{"id":"croque-monsieur","name":"Croque-monsieur","cal":290,"protein":14,"carbs":23,"fats":16,"sugar":3,"fiber":1.5,"defaultQty":130},{"id":"croque-madame","name":"Croque-madame","cal":280,"protein":14,"carbs":22,"fats":16,"sugar":2.5,"fiber":1.5,"defaultQty":150},{"id":"quiche-lorraine","name":"Quiche lorraine","cal":280,"protein":10,"carbs":17,"fats":19,"sugar":2,"fiber":1,"defaultQty":150},{"id":"quiche-saumon","name":"Quiche au saumon","cal":270,"protein":11,"carbs":18,"fats":17,"sugar":2,"fiber":1,"defaultQty":150},{"id":"tarte-thon","name":"Tarte au thon","cal":250,"protein":11,"carbs":20,"fats":14,"sugar":2,"fiber":1.5,"defaultQty":150},{"id":"tarte-flambee","name":"Tarte flambée","cal":220,"protein":10,"carbs":25,"fats":9,"sugar":2,"fiber":1.5,"defaultQty":150},{"id":"hachis-parmentier","name":"Hachis Parmentier","cal":130,"protein":7.5,"carbs":13,"fats":5,"sugar":1.5,"fiber":1.5,"defaultQty":250},{"id":"blanquette-veau","name":"Blanquette de veau","cal":145,"protein":11,"carbs":5,"fats":8.5,"sugar":1.5,"fiber":0.5,"defaultQty":250},{"id":"boeuf-bourguignon","name":"Bœuf bourguignon","cal":165,"protein":18,"carbs":4,"fats":8,"sugar":1.5,"fiber":1,"defaultQty":250},{"id":"pot-au-feu","name":"Pot-au-feu","cal":140,"protein":14,"carbs":6,"fats":6,"sugar":2,"fiber":1.5,"defaultQty":300},{"id":"cassoulet","name":"Cassoulet","cal":200,"protein":12,"carbs":16,"fats":9.5,"sugar":1,"fiber":4,"defaultQty":300},{"id":"choucroute-garnie","name":"Choucroute garnie","cal":195,"protein":12,"carbs":6,"fats":13,"sugar":1.5,"fiber":2.5,"defaultQty":300},{"id":"tartiflette","name":"Tartiflette","cal":200,"protein":9,"carbs":14,"fats":12,"sugar":1,"fiber":1.5,"defaultQty":250},{"id":"raclette-plat","name":"Raclette (plat)","cal":280,"protein":18,"carbs":12,"fats":18,"sugar":1.5,"fiber":1,"defaultQty":250},{"id":"fondue-savoyarde","name":"Fondue savoyarde","cal":320,"protein":22,"carbs":5,"fats":22,"sugar":0.5,"fiber":0,"defaultQty":200},{"id":"gratin-courgettes","name":"Gratin de courgettes","cal":110,"protein":5,"carbs":7,"fats":6,"sugar":3,"fiber":1.5,"defaultQty":250},{"id":"gratin-aubergines","name":"Gratin d'aubergines","cal":130,"protein":4,"carbs":8,"fats":9,"sugar":4,"fiber":2,"defaultQty":250},{"id":"moussaka","name":"Moussaka","cal":175,"protein":8,"carbs":10,"fats":11,"sugar":3,"fiber":2,"defaultQty":250},{"id":"lasagnes-boeuf","name":"Lasagnes au bœuf","cal":165,"protein":8,"carbs":14,"fats":8.5,"sugar":3,"fiber":1.2,"defaultQty":250},{"id":"paella-poulet","name":"Paella au poulet","cal":175,"protein":9,"carbs":22,"fats":6,"sugar":1,"fiber":1,"defaultQty":250},{"id":"couscous-merguez","name":"Couscous merguez","cal":165,"protein":8,"carbs":18,"fats":7,"sugar":2.5,"fiber":2,"defaultQty":350},{"id":"tajine-poulet","name":"Tajine de poulet","cal":130,"protein":11,"carbs":8,"fats":6,"sugar":4,"fiber":1.5,"defaultQty":300},{"id":"riz-cantonais-pp","name":"Riz cantonais (plat)","cal":165,"protein":5.5,"carbs":22,"fats":6,"sugar":1,"fiber":0.7,"defaultQty":250},{"id":"nem","name":"Nems","cal":250,"protein":8,"carbs":25,"fats":13,"sugar":2,"fiber":1.5,"defaultQty":100},{"id":"rouleau-printemps","name":"Rouleau de printemps","cal":105,"protein":5,"carbs":16,"fats":2,"sugar":1,"fiber":1.5,"defaultQty":100},{"id":"sushi-maki","name":"Maki sushi (6 pièces)","cal":145,"protein":4.5,"carbs":28,"fats":1.5,"sugar":5,"fiber":1,"defaultQty":150},{"id":"sushi-saumon","name":"Sushi saumon (1 pièce)","cal":145,"protein":7,"carbs":22,"fats":3,"sugar":4,"fiber":0.5,"defaultQty":30},{"id":"sashimi-saumon","name":"Sashimi saumon","cal":200,"protein":20,"carbs":0,"fats":13,"sugar":0,"fiber":0,"defaultQty":60},{"id":"nasi-goreng","name":"Nasi goreng","cal":165,"protein":6,"carbs":22,"fats":6,"sugar":2,"fiber":1,"defaultQty":250},{"id":"pad-thai","name":"Pad thaï","cal":175,"protein":8,"carbs":22,"fats":6,"sugar":4,"fiber":1.5,"defaultQty":250},{"id":"curry-poulet","name":"Curry de poulet","cal":150,"protein":11,"carbs":8,"fats":8,"sugar":3,"fiber":1.5,"defaultQty":250},{"id":"dahl-lentilles","name":"Dahl de lentilles","cal":110,"protein":6,"carbs":16,"fats":2.5,"sugar":2,"fiber":5,"defaultQty":250},{"id":"chili-con-carne","name":"Chili con carne","cal":130,"protein":8,"carbs":12,"fats":5,"sugar":3,"fiber":3,"defaultQty":250},{"id":"velouté","name":"Velouté de légumes","cal":60,"protein":1.7,"carbs":8,"fats":2,"sugar":3,"fiber":1.7,"defaultQty":250},{"id":"soupe-legumes","name":"Soupe de légumes","cal":35,"protein":1.2,"carbs":6,"fats":0.7,"sugar":3,"fiber":1.5,"defaultQty":250},{"id":"soupe-poireau-pdt","name":"Soupe poireau-pomme de terre","cal":50,"protein":1.4,"carbs":8,"fats":1.3,"sugar":2,"fiber":1.7,"defaultQty":250},{"id":"soupe-tomate","name":"Soupe de tomates","cal":40,"protein":1,"carbs":7,"fats":1,"sugar":5,"fiber":1,"defaultQty":250},{"id":"soupe-oignon","name":"Soupe à l'oignon gratinée","cal":75,"protein":3,"carbs":8,"fats":3.5,"sugar":4,"fiber":1,"defaultQty":250},{"id":"bouillabaisse","name":"Bouillabaisse","cal":95,"protein":8,"carbs":4,"fats":5,"sugar":1.5,"fiber":0.7,"defaultQty":350},{"id":"creme-brulee","name":"Crème brûlée","cal":280,"protein":4.5,"carbs":25,"fats":18,"sugar":23,"fiber":0,"defaultQty":100},{"id":"creme-caramel","name":"Crème caramel","cal":175,"protein":5,"carbs":25,"fats":6,"sugar":24,"fiber":0,"defaultQty":100},{"id":"mousse-chocolat","name":"Mousse au chocolat","cal":240,"protein":5,"carbs":25,"fats":14,"sugar":22,"fiber":1,"defaultQty":100},{"id":"ile-flottante","name":"Île flottante","cal":120,"protein":4,"carbs":18,"fats":4,"sugar":17,"fiber":0,"defaultQty":120},{"id":"riz-au-lait","name":"Riz au lait","cal":130,"protein":3.5,"carbs":20,"fats":4,"sugar":12,"fiber":0.4,"defaultQty":150},{"id":"creme-dessert-choco","name":"Crème dessert chocolat","cal":130,"protein":3.5,"carbs":19,"fats":4,"sugar":17,"fiber":1,"defaultQty":100},{"id":"liegeois-chocolat","name":"Liégeois au chocolat","cal":175,"protein":3.5,"carbs":23,"fats":8,"sugar":21,"fiber":0.5,"defaultQty":100},{"id":"panna-cotta","name":"Panna cotta","cal":230,"protein":3,"carbs":24,"fats":14,"sugar":22,"fiber":0,"defaultQty":100},{"id":"tiramisu","name":"Tiramisu","cal":295,"protein":5,"carbs":30,"fats":17,"sugar":24,"fiber":0.5,"defaultQty":100},{"id":"fondant-chocolat","name":"Fondant au chocolat","cal":410,"protein":6,"carbs":45,"fats":23,"sugar":35,"fiber":3,"defaultQty":100},{"id":"brownie","name":"Brownie","cal":466,"protein":5.5,"carbs":56,"fats":25,"sugar":40,"fiber":2,"defaultQty":60},{"id":"cookie-chocolat","name":"Cookie aux pépites","cal":480,"protein":6,"carbs":65,"fats":22,"sugar":38,"fiber":2,"defaultQty":30},{"id":"cake-marbre","name":"Cake marbré","cal":380,"protein":6,"carbs":55,"fats":15,"sugar":32,"fiber":1,"defaultQty":50},{"id":"quatre-quarts","name":"Quatre-quarts","cal":415,"protein":6,"carbs":50,"fats":22,"sugar":28,"fiber":1,"defaultQty":50},{"id":"madeleine-2","name":"Madeleine","cal":415,"protein":6,"carbs":50,"fats":21,"sugar":26,"fiber":1,"defaultQty":25},{"id":"macaron","name":"Macaron","cal":410,"protein":5,"carbs":65,"fats":15,"sugar":60,"fiber":1,"defaultQty":20},{"id":"baba-rhum","name":"Baba au rhum","cal":290,"protein":4,"carbs":45,"fats":9,"sugar":28,"fiber":1,"defaultQty":100},{"id":"clafoutis","name":"Clafoutis","cal":195,"protein":5,"carbs":27,"fats":7,"sugar":18,"fiber":1,"defaultQty":120},{"id":"gateau-yaourt","name":"Gâteau au yaourt","cal":320,"protein":6,"carbs":45,"fats":13,"sugar":23,"fiber":1,"defaultQty":80},{"id":"creme-mont-blanc","name":"Crème Mont Blanc","cal":130,"protein":3.5,"carbs":19,"fats":4,"sugar":17,"fiber":1,"defaultQty":100},{"id":"danette","name":"Danette chocolat","cal":130,"protein":3.5,"carbs":19,"fats":4,"sugar":17,"fiber":1,"defaultQty":125},{"id":"activia","name":"Activia nature","cal":75,"protein":4,"carbs":6,"fats":3,"sugar":6,"fiber":0,"defaultQty":125},{"id":"compote-pomme","name":"Compote de pommes","cal":60,"protein":0.3,"carbs":14,"fats":0.1,"sugar":12,"fiber":1.5,"defaultQty":100},{"id":"compote-allegee","name":"Compote allégée en sucres","cal":45,"protein":0.3,"carbs":10,"fats":0.1,"sugar":8,"fiber":1.5,"defaultQty":100},{"id":"salade-fruits","name":"Salade de fruits","cal":65,"protein":0.7,"carbs":15,"fats":0.2,"sugar":13,"fiber":2,"defaultQty":150},{"id":"glace-vanille","name":"Glace à la vanille","cal":200,"protein":3.5,"carbs":24,"fats":10,"sugar":22,"fiber":0,"defaultQty":60},{"id":"glace-chocolat","name":"Glace au chocolat","cal":215,"protein":4,"carbs":25,"fats":11,"sugar":22,"fiber":1,"defaultQty":60},{"id":"glace-fraise","name":"Glace à la fraise","cal":150,"protein":2.5,"carbs":23,"fats":5,"sugar":21,"fiber":0.5,"defaultQty":60},{"id":"sorbet-citron","name":"Sorbet citron","cal":130,"protein":0.5,"carbs":33,"fats":0,"sugar":30,"fiber":0.3,"defaultQty":60},{"id":"sorbet-fraise","name":"Sorbet fraise","cal":125,"protein":0.5,"carbs":32,"fats":0,"sugar":28,"fiber":0.5,"defaultQty":60},{"id":"magnum","name":"Magnum classique","cal":270,"protein":4,"carbs":27,"fats":16,"sugar":24,"fiber":1,"defaultQty":80},{"id":"cornetto","name":"Cornetto","cal":200,"protein":3,"carbs":25,"fats":10,"sugar":18,"fiber":1,"defaultQty":70},{"id":"pop-corn","name":"Pop-corn sucré","cal":460,"protein":7,"carbs":70,"fats":16,"sugar":25,"fiber":9,"defaultQty":30},{"id":"chips","name":"Chips nature","cal":530,"protein":6,"carbs":50,"fats":33,"sugar":0.5,"fiber":4.5,"defaultQty":30},{"id":"chips-paprika","name":"Chips paprika","cal":525,"protein":6,"carbs":52,"fats":31,"sugar":2,"fiber":4,"defaultQty":30},{"id":"tortillas-chips","name":"Tortillas chips","cal":480,"protein":6,"carbs":65,"fats":22,"sugar":1,"fiber":5,"defaultQty":30},{"id":"biscuit-aperitif","name":"Biscuit apéritif salé","cal":480,"protein":9,"carbs":65,"fats":18,"sugar":2,"fiber":3,"defaultQty":30},{"id":"olives-vertes","name":"Olives vertes","cal":145,"protein":1.4,"carbs":4,"fats":14,"sugar":0.5,"fiber":4,"defaultQty":30},{"id":"olives-noires","name":"Olives noires","cal":175,"protein":1.7,"carbs":5,"fats":17,"sugar":0.5,"fiber":4.4,"defaultQty":30},{"id":"cornichons","name":"Cornichons","cal":13,"protein":1,"carbs":2.5,"fats":0.2,"sugar":1.5,"fiber":1,"defaultQty":30},{"id":"chocolat-noir","name":"Chocolat noir 70%","cal":540,"protein":7.8,"carbs":45,"fats":36,"sugar":30,"fiber":11,"defaultQty":25},{"id":"chocolat-noir-85","name":"Chocolat noir 85%","cal":595,"protein":8,"carbs":28,"fats":50,"sugar":14,"fiber":13,"defaultQty":25},{"id":"chocolat-au-lait","name":"Chocolat au lait","cal":540,"protein":7.5,"carbs":58,"fats":30,"sugar":56,"fiber":2.5,"defaultQty":25},{"id":"chocolat-blanc","name":"Chocolat blanc","cal":565,"protein":6,"carbs":58,"fats":33,"sugar":58,"fiber":0,"defaultQty":25},{"id":"nutella","name":"Nutella","cal":539,"protein":6.3,"carbs":57,"fats":30.9,"sugar":56,"fiber":0,"defaultQty":20},{"id":"kinder-bueno","name":"Kinder Bueno","cal":575,"protein":9,"carbs":50,"fats":37,"sugar":50,"fiber":1,"defaultQty":40},{"id":"kinder-surprise","name":"Kinder Surprise","cal":565,"protein":8,"carbs":53,"fats":35,"sugar":53,"fiber":0.5,"defaultQty":20},{"id":"snickers","name":"Snickers","cal":480,"protein":7,"carbs":60,"fats":24,"sugar":50,"fiber":2,"defaultQty":50},{"id":"mars","name":"Mars","cal":450,"protein":4,"carbs":70,"fats":17,"sugar":60,"fiber":1,"defaultQty":50},{"id":"twix","name":"Twix","cal":495,"protein":5,"carbs":64,"fats":24,"sugar":49,"fiber":1,"defaultQty":50},{"id":"kitkat","name":"Kit Kat","cal":520,"protein":7,"carbs":60,"fats":27,"sugar":49,"fiber":2,"defaultQty":40},{"id":"bonbon-haribo","name":"Bonbons Haribo type","cal":343,"protein":6,"carbs":78,"fats":0,"sugar":47,"fiber":0,"defaultQty":30},{"id":"dragibus","name":"Dragibus","cal":360,"protein":6,"carbs":82,"fats":0,"sugar":56,"fiber":0,"defaultQty":30},{"id":"carambar","name":"Carambar","cal":396,"protein":1.6,"carbs":88,"fats":4.4,"sugar":60,"fiber":0,"defaultQty":10},{"id":"nougat","name":"Nougat","cal":430,"protein":6,"carbs":72,"fats":13,"sugar":60,"fiber":1.5,"defaultQty":30},{"id":"calisson","name":"Calisson","cal":450,"protein":5,"carbs":70,"fats":17,"sugar":65,"fiber":2,"defaultQty":30},{"id":"praline","name":"Praliné","cal":540,"protein":8,"carbs":50,"fats":33,"sugar":45,"fiber":4,"defaultQty":25},{"id":"marron-glace","name":"Marron glacé","cal":280,"protein":1.5,"carbs":70,"fats":0.5,"sugar":60,"fiber":4,"defaultQty":30},{"id":"guimauve","name":"Guimauve","cal":350,"protein":1.8,"carbs":81,"fats":0,"sugar":65,"fiber":0,"defaultQty":25},{"id":"biscuit-petit-lu","name":"Petit LU","cal":470,"protein":8,"carbs":70,"fats":16,"sugar":24,"fiber":2,"defaultQty":25}];
 
-function getFoodPresetById(id) {
-  return FOOD_PRESETS.find(food => food.id === id) || FOOD_PRESETS[0];
+// Cache mémoire pour les résultats API (clé = nom normalisé)
+const FOOD_API_CACHE = new Map();
+let foodSearchTimer = null;
+let foodSearchAbortOFF = null;
+let foodSearchAbortUSDA = null;
+let currentSelectedFood = null;
+let currentSearchQuery = '';
+
+// Index pré-normalisé pour recherche locale rapide
+const LOCAL_FOODS_INDEX = LOCAL_FOODS.map(f => ({
+  food: f,
+  norm: (f.name || '').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/œ/g, 'oe').replace(/æ/g, 'ae')
+}));
+
+function normalizeQuery(s) {
+  return (s || '').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/œ/g, 'oe').replace(/æ/g, 'ae')
+    .trim();
 }
 
-function initFoodPresets() {
-  const select = document.getElementById('food-preset-select');
-  if (!select) return;
-  select.innerHTML = FOOD_PRESETS.map(food => {
-    const unit = food.unit || 'g';
-    return '<option value="' + food.id + '">' + food.name + ' - ' + food.cal + ' kcal/100' + unit + '</option>';
-  }).join('');
-  select.value = FOOD_PRESETS[0].id;
-  selectFoodPreset();
+function searchLocalFoods(query, max) {
+  const q = normalizeQuery(query);
+  if (!q) return [];
+  // Tokenize la requête: chaque mot doit matcher
+  const tokens = q.split(/\s+/).filter(t => t.length > 0);
+  if (tokens.length === 0) return [];
+  const scored = [];
+  for (const item of LOCAL_FOODS_INDEX) {
+    let score = 0;
+    let allMatch = true;
+    for (const tok of tokens) {
+      const pos = item.norm.indexOf(tok);
+      if (pos === -1) { allMatch = false; break; }
+      // Bonus si le mot commence par le token
+      if (pos === 0) score += 100;
+      else if (item.norm[pos - 1] === ' ') score += 50;
+      else score += 10;
+      // Bonus longueur: noms courts = mieux
+      score += Math.max(0, 30 - item.norm.length / 3);
+    }
+    if (allMatch) scored.push({ food: item.food, score });
+  }
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, max || 10).map(s => s.food);
 }
 
-function selectFoodPreset() {
-  const select = document.getElementById('food-preset-select');
+// Open Food Facts (gratuit, sans clé)
+async function searchOpenFoodFacts(query, signal) {
+  const cacheKey = 'off:' + normalizeQuery(query);
+  if (FOOD_API_CACHE.has(cacheKey)) return FOOD_API_CACHE.get(cacheKey);
+  const url = 'https://world.openfoodfacts.org/cgi/search.pl?'
+    + 'search_terms=' + encodeURIComponent(query)
+    + '&search_simple=1&action=process&json=1&page_size=15&lc=fr'
+    + '&fields=product_name,product_name_fr,brands,nutriments,countries_tags';
+  const res = await fetch(url, { signal });
+  if (!res.ok) throw new Error('OFF API error');
+  const data = await res.json();
+  const products = (data.products || [])
+    .map(p => parseOFFProduct(p))
+    .filter(p => p && p.cal != null && p.name);
+  products.sort((a, b) => (b.fr ? 1 : 0) - (a.fr ? 1 : 0));
+  const result = products.slice(0, 10);
+  FOOD_API_CACHE.set(cacheKey, result);
+  return result;
+}
+
+function parseOFFProduct(p) {
+  if (!p || !p.nutriments) return null;
+  const n = p.nutriments;
+  const cal = n['energy-kcal_100g'] != null ? Number(n['energy-kcal_100g'])
+            : (n['energy-kcal'] != null ? Number(n['energy-kcal']) : null);
+  if (cal == null || isNaN(cal) || cal <= 0) return null;
+  const name = p.product_name_fr || p.product_name || '';
+  if (!name || name.length < 2) return null;
+  const fr = Array.isArray(p.countries_tags) && p.countries_tags.includes('en:france');
+  return {
+    id: 'off-' + Math.random().toString(36).slice(2, 10),
+    name: name.slice(0, 80),
+    brand: p.brands || '',
+    cal: Math.round(cal * 10) / 10,
+    protein: Number(n.proteins_100g) || 0,
+    carbs: Number(n.carbohydrates_100g) || 0,
+    fats: Number(n.fat_100g) || 0,
+    sugar: Number(n.sugars_100g) || 0,
+    fiber: Number(n.fiber_100g) || 0,
+    defaultQty: 100,
+    source: 'off',
+    fr: fr
+  };
+}
+
+// USDA FoodData Central (gratuit, clé DEMO_KEY pour démarrer)
+// Pour usage intensif, l'utilisateur peut obtenir sa propre clé sur https://fdc.nal.usda.gov/api-key-signup.html
+const USDA_API_KEY = 'DEMO_KEY';
+async function searchUSDA(query, signal) {
+  const cacheKey = 'usda:' + normalizeQuery(query);
+  if (FOOD_API_CACHE.has(cacheKey)) return FOOD_API_CACHE.get(cacheKey);
+  const url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=' + USDA_API_KEY
+    + '&query=' + encodeURIComponent(query)
+    + '&pageSize=10&dataType=Foundation,SR%20Legacy,Survey%20%28FNDDS%29';
+  const res = await fetch(url, { signal });
+  if (!res.ok) throw new Error('USDA API error');
+  const data = await res.json();
+  const products = (data.foods || [])
+    .map(p => parseUSDAProduct(p))
+    .filter(p => p && p.cal != null && p.name);
+  const result = products.slice(0, 10);
+  FOOD_API_CACHE.set(cacheKey, result);
+  return result;
+}
+
+function parseUSDAProduct(p) {
+  if (!p || !p.foodNutrients) return null;
+  let cal = null, protein = 0, carbs = 0, fats = 0, sugar = 0, fiber = 0;
+  for (const n of p.foodNutrients) {
+    const id = n.nutrientId;
+    const v = Number(n.value) || 0;
+    if (id === 1008 || n.nutrientName === 'Energy') { cal = v; }
+    else if (id === 1003 || n.nutrientName === 'Protein') { protein = v; }
+    else if (id === 1005 || (n.nutrientName && n.nutrientName.includes('Carbohydrate'))) { carbs = v; }
+    else if (id === 1004 || n.nutrientName === 'Total lipid (fat)') { fats = v; }
+    else if (id === 2000 || (n.nutrientName && n.nutrientName.includes('Sugars'))) { sugar = v; }
+    else if (id === 1079 || (n.nutrientName && n.nutrientName.includes('Fiber'))) { fiber = v; }
+  }
+  if (cal == null || cal <= 0) return null;
+  const name = p.description || '';
+  if (!name) return null;
+  return {
+    id: 'usda-' + p.fdcId,
+    name: name.slice(0, 80),
+    brand: p.brandOwner || '',
+    cal: Math.round(cal * 10) / 10,
+    protein: Math.round(protein * 10) / 10,
+    carbs: Math.round(carbs * 10) / 10,
+    fats: Math.round(fats * 10) / 10,
+    sugar: Math.round(sugar * 10) / 10,
+    fiber: Math.round(fiber * 10) / 10,
+    defaultQty: 100,
+    source: 'usda'
+  };
+}
+
+function onFoodSearchInput() {
+  const input = document.getElementById('food-search-input');
+  const clearBtn = document.getElementById('food-search-clear');
+  const results = document.getElementById('food-search-results');
+  if (!input || !results) return;
+  const query = input.value.trim();
+  currentSearchQuery = query;
+  if (clearBtn) clearBtn.classList.toggle('visible', query.length > 0);
+
+  if (foodSearchTimer) clearTimeout(foodSearchTimer);
+  if (foodSearchAbortOFF) { try { foodSearchAbortOFF.abort(); } catch (e) {} }
+  if (foodSearchAbortUSDA) { try { foodSearchAbortUSDA.abort(); } catch (e) {} }
+
+  if (!query) {
+    results.classList.remove('visible');
+    results.innerHTML = '';
+    return;
+  }
+
+  // 1. Affiche immédiatement les résultats CIQUAL (locaux)
+  const local = searchLocalFoods(query, 10);
+  renderFoodResults({ local, off: [], usda: [], query, loadingOff: true, loadingUsda: true });
+
+  // 2. Lance les 2 APIs en parallèle après un petit délai (debounce)
+  foodSearchTimer = setTimeout(() => {
+    let offResults = [];
+    let usdaResults = [];
+    let offDone = false;
+    let usdaDone = false;
+
+    const update = () => {
+      if (currentSearchQuery !== query) return;
+      const localNow = searchLocalFoods(currentSearchQuery, 10);
+      renderFoodResults({
+        local: localNow,
+        off: offResults,
+        usda: usdaResults,
+        query: currentSearchQuery,
+        loadingOff: !offDone,
+        loadingUsda: !usdaDone
+      });
+    };
+
+    foodSearchAbortOFF = new AbortController();
+    searchOpenFoodFacts(query, foodSearchAbortOFF.signal)
+      .then(r => { offResults = r; offDone = true; update(); })
+      .catch(e => { if (e.name !== 'AbortError') { offDone = true; update(); } });
+
+    foodSearchAbortUSDA = new AbortController();
+    searchUSDA(query, foodSearchAbortUSDA.signal)
+      .then(r => { usdaResults = r; usdaDone = true; update(); })
+      .catch(e => { if (e.name !== 'AbortError') { usdaDone = true; update(); } });
+  }, 350);
+}
+
+function renderFoodResults(opts) {
+  const { local, off, usda, query, loadingOff, loadingUsda } = opts;
+  const results = document.getElementById('food-search-results');
+  if (!results) return;
+  let html = '';
+  if (local.length > 0) {
+    html += '<div class="food-search-section">🇫🇷 Aliments français (CIQUAL)</div>';
+    local.forEach(f => { html += foodItemHTML(f, 'ciqual'); });
+  }
+  if (off.length > 0) {
+    html += '<div class="food-search-section">📦 Produits Open Food Facts</div>';
+    off.forEach(f => { html += foodItemHTML(f, 'off'); });
+  }
+  if (usda.length > 0) {
+    html += '<div class="food-search-section">🌎 Base USDA (anglais)</div>';
+    usda.forEach(f => { html += foodItemHTML(f, 'usda'); });
+  }
+  if (loadingOff || loadingUsda) {
+    const sources = [];
+    if (loadingOff) sources.push('Open Food Facts');
+    if (loadingUsda) sources.push('USDA');
+    html += '<div class="food-search-loading">Recherche sur ' + sources.join(' & ') + '…</div>';
+  } else if (local.length === 0 && off.length === 0 && usda.length === 0) {
+    html += '<div class="food-search-empty">Aucun résultat pour « ' + escapeHTML(query) + ' »</div>';
+  }
+  results.innerHTML = html;
+  results.classList.add('visible');
+  // Stocker les données sur les éléments
+  results.querySelectorAll('.food-search-item').forEach((el) => {
+    el.addEventListener('click', () => {
+      const src = el.dataset.src;
+      const id = el.dataset.id;
+      let food = null;
+      if (src === 'ciqual') food = LOCAL_FOODS.find(f => f.id === id);
+      else if (src === 'off') food = (FOOD_API_CACHE.get('off:' + normalizeQuery(query)) || []).find(f => f.id === id);
+      else if (src === 'usda') food = (FOOD_API_CACHE.get('usda:' + normalizeQuery(query)) || []).find(f => f.id === id);
+      if (food) selectFood(food);
+    });
+  });
+}
+
+function foodItemHTML(food, src) {
+  const meta = food.brand ? escapeHTML(food.brand) + ' · ' : '';
+  const unit = food.unit || 'g';
+  return '<div class="food-search-item" data-src="' + src + '" data-id="' + escapeHTML(food.id) + '">'
+    + '<div class="food-search-item-info">'
+    + '<div class="food-search-item-name">' + escapeHTML(food.name) + '</div>'
+    + '<div class="food-search-item-meta">' + meta + 'pour 100' + unit + '</div>'
+    + '</div>'
+    + '<div class="food-search-item-cal">' + Math.round(food.cal) + ' kcal</div>'
+    + '</div>';
+}
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"\']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function clearFoodSearch() {
+  const input = document.getElementById('food-search-input');
+  const clearBtn = document.getElementById('food-search-clear');
+  const results = document.getElementById('food-search-results');
+  if (input) input.value = '';
+  if (clearBtn) clearBtn.classList.remove('visible');
+  if (results) { results.classList.remove('visible'); results.innerHTML = ''; }
+  currentSearchQuery = '';
+}
+
+function selectFood(food) {
+  currentSelectedFood = food;
+  const results = document.getElementById('food-search-results');
+  const input = document.getElementById('food-search-input');
+  const selectedBox = document.getElementById('food-selected');
+  const nameEl = document.getElementById('food-selected-name');
+  const metaEl = document.getElementById('food-selected-meta');
   const qtyInput = document.getElementById('food-preset-qty');
-  if (!select || !qtyInput) return;
-  const food = getFoodPresetById(select.value);
-  qtyInput.value = food.defaultQty || 100;
+  const qtyUnit = document.getElementById('food-qty-unit');
+  if (results) { results.classList.remove('visible'); }
+  if (input) { input.value = food.name; }
+  const clearBtn = document.getElementById('food-search-clear');
+  if (clearBtn) clearBtn.classList.add('visible');
+  if (selectedBox) selectedBox.style.display = 'block';
+  if (nameEl) nameEl.textContent = food.name;
+  if (metaEl) {
+    const unit = food.unit || 'g';
+    const brand = food.brand ? food.brand + ' · ' : '';
+    const sourceLabels = { ciqual: 'CIQUAL', off: 'Open Food Facts', usda: 'USDA' };
+    const srcLabel = sourceLabels[food.source] || (food.source ? '' : 'CIQUAL');
+    metaEl.textContent = brand + Math.round(food.cal) + ' kcal pour 100' + unit + (srcLabel ? ' · ' + srcLabel : '');
+  }
+  if (qtyInput) qtyInput.value = food.defaultQty || 100;
+  if (qtyUnit) qtyUnit.textContent = food.unit || 'g';
   updateFoodPresetCalc();
 }
 
@@ -2293,13 +2754,11 @@ function formatFoodPresetMacro(value) {
 }
 
 function updateFoodPresetCalc() {
-  const select = document.getElementById('food-preset-select');
   const qtyInput = document.getElementById('food-preset-qty');
   const calcEl = document.getElementById('food-preset-calc');
-  if (!select || !qtyInput || !calcEl) return;
-  const food = getFoodPresetById(select.value);
+  if (!qtyInput || !calcEl || !currentSelectedFood) return;
   const qty = parseFloat(qtyInput.value) || 0;
-  const calc = calcFoodPreset(food, qty);
+  const calc = calcFoodPreset(currentSelectedFood, qty);
   calcEl.innerHTML = `
     <div class="food-preset-chip main"><b>${calc.cal}</b><span>kcal</span></div>
     <div class="food-preset-chip"><b>${formatFoodPresetMacro(calc.protein)}</b><span>prot</span></div>
@@ -2309,10 +2768,10 @@ function updateFoodPresetCalc() {
 }
 
 function addSelectedFood() {
-  const select = document.getElementById('food-preset-select');
+  if (!currentSelectedFood) { showToast('Choisis un aliment'); return; }
   const qtyInput = document.getElementById('food-preset-qty');
-  if (!select || !qtyInput) return;
-  const food = getFoodPresetById(select.value);
+  if (!qtyInput) return;
+  const food = currentSelectedFood;
   const qty = parseFloat(qtyInput.value);
   if (!qty || qty <= 0) { showToast('Entre une quantité valide'); return; }
   const calc = calcFoodPreset(food, qty);
@@ -2335,6 +2794,21 @@ function addSelectedFood() {
   updateCaloriesRing();
   updateMealList();
   showToast(food.name + ' ajouté : +' + calc.cal + ' kcal');
+}
+
+function initFoodPresets() {
+  // Ferme le dropdown quand on clique en dehors
+  document.addEventListener('click', (e) => {
+    const wrap = document.querySelector('.food-search-wrap');
+    const results = document.getElementById('food-search-results');
+    if (!wrap || !results) return;
+    if (!wrap.contains(e.target)) {
+      results.classList.remove('visible');
+    }
+  });
+  // Affiche le nombre d'aliments dans la base
+  const sub = document.getElementById('food-search-sub');
+  if (sub) sub.textContent = LOCAL_FOODS.length + '+ aliments';
 }
 
 function addCal(amount) {
