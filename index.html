@@ -338,6 +338,92 @@
     .omad-actions { align-items: stretch; flex-direction: column; }
     .omad-unlock-btn { width: 100%; }
   }
+  .weekly-deficit-card {
+    border: 1px solid rgba(74,159,255,0.18);
+    background: linear-gradient(135deg, #f2f8ff, #ffffff);
+  }
+  .deficit-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .deficit-badge {
+    flex: 0 0 auto;
+    border-radius: 999px;
+    padding: 6px 9px;
+    background: #e6f2ff;
+    color: #2563eb;
+    font-size: 10px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+  .deficit-badge.good {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+  }
+  .deficit-badge.warn {
+    background: #fff4ec;
+    color: var(--orange);
+  }
+  .deficit-badge.bad {
+    background: #ffe9e9;
+    color: var(--danger);
+  }
+  .deficit-score-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .deficit-score {
+    color: var(--text);
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .deficit-score span:last-child {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 800;
+    margin-left: 4px;
+  }
+  .deficit-equivalent {
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: 900;
+    text-align: right;
+    line-height: 1.25;
+  }
+  .deficit-progress {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--surface2);
+    margin-top: 14px;
+  }
+  .deficit-progress div {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #4a9fff, var(--primary));
+    transition: width 0.4s ease;
+  }
+  .deficit-progress div.bad {
+    background: linear-gradient(90deg, var(--danger), #ff9f9f);
+  }
+  .deficit-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
   .cal-break-sep {
     align-self: center;
     font-size: 18px;
@@ -435,6 +521,67 @@
     cursor: pointer; transition: background 0.2s;
   }
   .input-group button:active { background: var(--primary-dark); }
+
+  .meal-tools-toggle {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-top: 16px;
+    background: var(--surface2);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .meal-tools-toggle-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    text-align: left;
+  }
+  .meal-tools-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    flex: 0 0 auto;
+    font-size: 18px;
+  }
+  .meal-tools-title {
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.15;
+  }
+  .meal-tools-summary {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-top: 2px;
+  }
+  .meal-tools-chevron {
+    color: var(--text-muted);
+    font-size: 18px;
+    font-weight: 900;
+    transition: transform 0.2s ease;
+  }
+  .meal-tools-toggle.expanded .meal-tools-chevron { transform: rotate(180deg); }
+  .meal-tools-content {
+    display: none;
+    padding-top: 2px;
+  }
+  .meal-tools-content.expanded {
+    display: block;
+    animation: fadeUp 0.2s ease;
+  }
 
   .meal-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
   .meal-item {
@@ -1744,6 +1891,25 @@
     </div>
   </div>
 
+  <div class="card weekly-deficit-card" id="weekly-deficit-card">
+    <div class="deficit-top">
+      <div>
+        <div class="card-title">Déficit hebdo</div>
+        <div class="card-subtitle" id="weekly-deficit-range">Cette semaine</div>
+      </div>
+      <div class="deficit-badge" id="weekly-deficit-badge">Objectif</div>
+    </div>
+    <div class="deficit-score-row">
+      <div class="deficit-score"><span id="weekly-deficit-value">0</span><span>kcal</span></div>
+      <div class="deficit-equivalent" id="weekly-deficit-equivalent">≈ 0 kg<br>estimé</div>
+    </div>
+    <div class="deficit-progress"><div id="weekly-deficit-fill"></div></div>
+    <div class="deficit-meta">
+      <span id="weekly-deficit-days">0 jour renseigné</span>
+      <span id="weekly-deficit-target">Objectif 3500 kcal</span>
+    </div>
+  </div>
+
   <!-- Calendrier mensuel des points (rétractable) -->
   <div class="calendar-card" id="calendar-card">
     <button class="calendar-toggle" onclick="toggleCalendar()">
@@ -1819,84 +1985,97 @@
       </div>
     </div>
 
-    <div class="quick-add">
-      <button class="quick-btn" data-omad-gated onclick="addCal(100)">+100</button>
-      <button class="quick-btn" data-omad-gated onclick="addCal(250)">+250</button>
-      <button class="quick-btn" data-omad-gated onclick="addCal(500)">+500</button>
-      <button class="quick-btn" data-omad-gated onclick="addCal(700)">+700</button>
-    </div>
+    <button class="meal-tools-toggle" id="meal-tools-toggle" type="button" onclick="toggleMealTools()">
+      <span class="meal-tools-toggle-left">
+        <span class="meal-tools-icon">🍽️</span>
+        <span>
+          <span class="meal-tools-title">Journal repas</span>
+          <span class="meal-tools-summary" id="meal-tools-summary">Ajouter ou voir le repas du jour</span>
+        </span>
+      </span>
+      <span class="meal-tools-chevron" id="meal-tools-chevron">⌄</span>
+    </button>
 
-    <div class="input-group">
-      <input type="number" id="cal-input" data-omad-gated placeholder="Calories du repas" inputmode="numeric">
-      <button data-omad-gated onclick="addCustomCal()">+</button>
-    </div>
+    <div class="meal-tools-content" id="meal-tools-content">
+      <div class="quick-add">
+        <button class="quick-btn" data-omad-gated onclick="addCal(100)">+100</button>
+        <button class="quick-btn" data-omad-gated onclick="addCal(250)">+250</button>
+        <button class="quick-btn" data-omad-gated onclick="addCal(500)">+500</button>
+        <button class="quick-btn" data-omad-gated onclick="addCal(700)">+700</button>
+      </div>
 
-    <div class="food-preset">
-      <div class="food-preset-head">
-        <div class="food-preset-title">Ajouter un aliment</div>
-        <div class="food-preset-sub" id="food-search-sub">FatSecret style</div>
+      <div class="input-group">
+        <input type="number" id="cal-input" data-omad-gated placeholder="Calories du repas" inputmode="numeric">
+        <button data-omad-gated onclick="addCustomCal()">+</button>
       </div>
-      <div class="food-preset-sources" aria-label="Sources alimentaires">
-        <div class="food-source-pill"><b id="food-local-count">548+</b><span>locaux</span></div>
-        <div class="food-source-pill"><b>Open Food Facts</b><span>produits</span></div>
-        <div class="food-source-pill"><b>USDA</b><span>monde</span></div>
-      </div>
-      <div class="food-search-wrap">
-        <div class="food-search-box">
-          <svg class="food-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="food-search-input" placeholder="Rechercher un aliment (ex: œuf au plat)" autocomplete="off" oninput="onFoodSearchInput()" onfocus="onFoodSearchInput()">
-          <button class="food-search-clear" id="food-search-clear" onclick="clearFoodSearch()" type="button" aria-label="Effacer">×</button>
+
+      <div class="food-preset">
+        <div class="food-preset-head">
+          <div class="food-preset-title">Ajouter un aliment</div>
+          <div class="food-preset-sub" id="food-search-sub">FatSecret style</div>
         </div>
-        <div class="food-search-results" id="food-search-results"></div>
-      </div>
-      <div class="food-custom-form" id="food-custom-form">
-        <div class="food-custom-title">Créer un aliment perso</div>
-        <input type="text" id="custom-food-name" placeholder="Nom de l'aliment">
-        <div class="food-custom-grid" style="margin-top:8px">
-          <input type="number" id="custom-food-cal" placeholder="kcal / 100g" inputmode="decimal">
-          <input type="number" id="custom-food-protein" placeholder="Protéines" inputmode="decimal">
-          <input type="number" id="custom-food-carbs" placeholder="Glucides" inputmode="decimal">
-          <input type="number" id="custom-food-fats" placeholder="Lipides" inputmode="decimal">
+        <div class="food-preset-sources" aria-label="Sources alimentaires">
+          <div class="food-source-pill"><b id="food-local-count">548+</b><span>locaux</span></div>
+          <div class="food-source-pill"><b>Open Food Facts</b><span>produits</span></div>
+          <div class="food-source-pill"><b>USDA</b><span>monde</span></div>
         </div>
-        <div class="food-custom-actions">
-          <button class="food-custom-cancel" onclick="closeCustomFoodForm()" type="button">Annuler</button>
-          <button class="food-custom-save" onclick="saveCustomFood()" type="button">Ajouter à ma base</button>
+        <div class="food-search-wrap">
+          <div class="food-search-box">
+            <svg class="food-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="food-search-input" placeholder="Rechercher un aliment (ex: œuf au plat)" autocomplete="off" oninput="onFoodSearchInput()" onfocus="onFoodSearchInput()">
+            <button class="food-search-clear" id="food-search-clear" onclick="clearFoodSearch()" type="button" aria-label="Effacer">×</button>
+          </div>
+          <div class="food-search-results" id="food-search-results"></div>
         </div>
-      </div>
-      <div class="food-selected" id="food-selected" style="display:none">
-        <div class="food-selected-info">
-          <div class="food-selected-name" id="food-selected-name">—</div>
-          <div class="food-selected-meta" id="food-selected-meta">—</div>
-        </div>
-        <div class="food-preset-row" style="margin-top:10px">
-          <div class="food-qty-wrap">
-            <span class="food-qty-label">Quantité</span>
-            <input type="number" id="food-preset-qty" value="100" min="1" inputmode="decimal" oninput="updateFoodPresetCalc()" aria-label="Quantité">
-            <span class="food-qty-unit" id="food-qty-unit">g</span>
+        <div class="food-custom-form" id="food-custom-form">
+          <div class="food-custom-title">Créer un aliment perso</div>
+          <input type="text" id="custom-food-name" placeholder="Nom de l'aliment">
+          <div class="food-custom-grid" style="margin-top:8px">
+            <input type="number" id="custom-food-cal" placeholder="kcal / 100g" inputmode="decimal">
+            <input type="number" id="custom-food-protein" placeholder="Protéines" inputmode="decimal">
+            <input type="number" id="custom-food-carbs" placeholder="Glucides" inputmode="decimal">
+            <input type="number" id="custom-food-fats" placeholder="Lipides" inputmode="decimal">
+          </div>
+          <div class="food-custom-actions">
+            <button class="food-custom-cancel" onclick="closeCustomFoodForm()" type="button">Annuler</button>
+            <button class="food-custom-save" onclick="saveCustomFood()" type="button">Ajouter à ma base</button>
           </div>
         </div>
-        <div class="food-preset-calc" id="food-preset-calc">
-          <div class="food-preset-chip main"><b>0</b><span>kcal</span></div>
-          <div class="food-preset-chip"><b>0g</b><span>prot</span></div>
-          <div class="food-preset-chip"><b>0g</b><span>gluc</span></div>
-          <div class="food-preset-chip"><b>0g</b><span>lip</span></div>
+        <div class="food-selected" id="food-selected" style="display:none">
+          <div class="food-selected-info">
+            <div class="food-selected-name" id="food-selected-name">—</div>
+            <div class="food-selected-meta" id="food-selected-meta">—</div>
+          </div>
+          <div class="food-preset-row" style="margin-top:10px">
+            <div class="food-qty-wrap">
+              <span class="food-qty-label">Quantité</span>
+              <input type="number" id="food-preset-qty" value="100" min="1" inputmode="decimal" oninput="updateFoodPresetCalc()" aria-label="Quantité">
+              <span class="food-qty-unit" id="food-qty-unit">g</span>
+            </div>
+          </div>
+          <div class="food-preset-calc" id="food-preset-calc">
+            <div class="food-preset-chip main"><b>0</b><span>kcal</span></div>
+            <div class="food-preset-chip"><b>0g</b><span>prot</span></div>
+            <div class="food-preset-chip"><b>0g</b><span>gluc</span></div>
+            <div class="food-preset-chip"><b>0g</b><span>lip</span></div>
+          </div>
+          <button class="food-preset-add" data-omad-gated onclick="addSelectedFood()">Ajouter au journal</button>
         </div>
-        <button class="food-preset-add" data-omad-gated onclick="addSelectedFood()">Ajouter au journal</button>
       </div>
+
+      <button class="photo-btn" data-omad-gated onclick="document.getElementById('photo-input').click()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        Analyser une photo de mon repas
+      </button>
+      <input type="file" id="photo-input" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoSelect(event)">
+
+      <button class="barcode-btn" data-omad-gated onclick="openBarcodeScanner()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="2" height="12"/><rect x="7" y="6" width="1" height="12"/><rect x="10" y="6" width="3" height="12"/><rect x="15" y="6" width="1" height="12"/><rect x="18" y="6" width="3" height="12"/></svg>
+        Scanner un code-barres
+      </button>
+
+      <div id="meal-list" class="meal-list"></div>
     </div>
-
-    <button class="photo-btn" data-omad-gated onclick="document.getElementById('photo-input').click()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-      Analyser une photo de mon repas
-    </button>
-    <input type="file" id="photo-input" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoSelect(event)">
-
-    <button class="barcode-btn" data-omad-gated onclick="openBarcodeScanner()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="2" height="12"/><rect x="7" y="6" width="1" height="12"/><rect x="10" y="6" width="3" height="12"/><rect x="15" y="6" width="1" height="12"/><rect x="18" y="6" width="3" height="12"/></svg>
-      Scanner un code-barres
-    </button>
-
-    <div id="meal-list" class="meal-list"></div>
   </div>
 
 
@@ -2219,6 +2398,7 @@
   <div class="settings-label">Régime & Activité</div>
   <div class="card">
     <div class="field"><label>Calories max / jour</label><input type="number" id="s-kcal" inputmode="numeric"></div>
+    <div class="field"><label>Objectif déficit hebdo (kcal)</label><input type="number" id="s-weekly-deficit-goal" inputmode="numeric"></div>
     <div class="field"><label>Régime alimentaire</label><textarea id="s-diet"></textarea></div>
     <div class="field"><label>Activité physique</label><input type="text" id="s-activity"></div>
     <div class="field"><label>Objectif pas / jour</label><input type="number" id="s-steps-goal" inputmode="numeric"></div>
@@ -2454,6 +2634,7 @@ let state = {
     diet: 'Flexitarien : lundi au vendredi poisson uniquement, week-end viande autorisée',
     activity: 'Marche, suivi du nombre de pas',
     stepsGoal: 8000,
+    weeklyDeficitGoal: 3500,
   },
   apiKey: '',
   weightEntries: [],
@@ -2679,6 +2860,7 @@ function updateOmadCard() {
 
   if (note) note.textContent = getOmadMealSummary(status);
   setOmadGatedControls(status.unlocked);
+  updateMealToolsSummary(status);
 }
 
 function guardOmadMealLog() {
@@ -2715,12 +2897,144 @@ function toggleOmadOverrideToday() {
   });
 }
 
+function toggleMealTools(forceOpen) {
+  const toggle = document.getElementById('meal-tools-toggle');
+  const content = document.getElementById('meal-tools-content');
+  if (!toggle || !content) return;
+  const open = typeof forceOpen === 'boolean' ? forceOpen : !content.classList.contains('expanded');
+  content.classList.toggle('expanded', open);
+  toggle.classList.toggle('expanded', open);
+  toggle.setAttribute('aria-expanded', String(open));
+}
+
+function updateMealToolsSummary(status = getOmadStatus()) {
+  const summary = document.getElementById('meal-tools-summary');
+  if (!summary) return;
+  const meals = state.calorieEntries[todayKey()] || [];
+  const eaten = meals.reduce((sum, meal) => sum + numberOrZero(meal.cal), 0);
+  if (meals.length) {
+    const label = meals.length > 1 ? 'ajouts' : 'ajout';
+    summary.textContent = `${eaten.toLocaleString('fr-FR')} kcal · ${meals.length} ${label} aujourd’hui`;
+  } else if (status.unlocked) {
+    summary.textContent = 'Fenêtre ouverte · prêt à noter ton repas';
+  } else {
+    summary.textContent = `Verrouillé · ouverture ${status.startLabel}`;
+  }
+}
+
+function dateKeyFromDate(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function getWeekStart(date = new Date()) {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  const day = d.getDay();
+  const mondayOffset = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + mondayOffset);
+  return d;
+}
+
+function formatShortDate(date) {
+  return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }).replace('.', '');
+}
+
+function getWeeklyDeficitStats(now = new Date()) {
+  const weekStart = getWeekStart(now);
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekStart.getDate() + 6);
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+  const maxOffset = Math.min(6, Math.max(0, Math.round((today - weekStart) / 86400000)));
+  const goal = state.profile.kcal || 1500;
+  const target = state.profile.weeklyDeficitGoal || 3500;
+  let total = 0;
+  let loggedDays = 0;
+
+  for (let i = 0; i <= maxOffset; i++) {
+    const d = new Date(weekStart);
+    d.setDate(weekStart.getDate() + i);
+    const key = dateKeyFromDate(d);
+    const meals = state.calorieEntries[key] || [];
+    if (!meals.length) continue;
+    const eaten = meals.reduce((sum, meal) => sum + numberOrZero(meal.cal), 0);
+    const burned = getBurnedTotalForDate(key);
+    const net = eaten - burned;
+    total += goal - net;
+    loggedDays += 1;
+  }
+
+  return {
+    total: Math.round(total),
+    loggedDays,
+    target,
+    range: `${formatShortDate(weekStart)} - ${formatShortDate(weekEnd)}`,
+    average: loggedDays ? Math.round(total / loggedDays) : 0,
+    equivalentKg: total / 7700
+  };
+}
+
+function updateWeeklyDeficit() {
+  const card = document.getElementById('weekly-deficit-card');
+  if (!card) return;
+  const stats = getWeeklyDeficitStats();
+  const value = document.getElementById('weekly-deficit-value');
+  const range = document.getElementById('weekly-deficit-range');
+  const badge = document.getElementById('weekly-deficit-badge');
+  const fill = document.getElementById('weekly-deficit-fill');
+  const equivalent = document.getElementById('weekly-deficit-equivalent');
+  const days = document.getElementById('weekly-deficit-days');
+  const target = document.getElementById('weekly-deficit-target');
+  const absTotal = Math.abs(stats.total);
+  const progress = stats.target > 0 ? Math.min(100, (absTotal / stats.target) * 100) : 0;
+
+  if (value) value.textContent = stats.total.toLocaleString('fr-FR');
+  if (range) range.textContent = stats.range;
+  if (fill) {
+    fill.style.width = `${progress}%`;
+    fill.classList.toggle('bad', stats.total < 0);
+  }
+  if (badge) {
+    badge.className = 'deficit-badge ' + (stats.total < 0 ? 'bad' : (stats.total >= stats.target ? 'good' : 'warn'));
+    badge.textContent = stats.total < 0 ? 'Surplus' : `${Math.round(stats.target ? (stats.total / stats.target) * 100 : 0)}%`;
+  }
+  if (equivalent) {
+    if (stats.total > 0) {
+      const kg = Math.max(0, stats.equivalentKg).toFixed(2).replace('.', ',');
+      equivalent.innerHTML = `≈ ${kg} kg<br>estimé`;
+    } else if (stats.total < 0) {
+      equivalent.innerHTML = 'surplus<br>à compenser';
+    } else {
+      equivalent.innerHTML = 'semaine<br>à lancer';
+    }
+  }
+  if (days) {
+    days.textContent = stats.loggedDays
+      ? `${stats.loggedDays} j renseigné${stats.loggedDays > 1 ? 's' : ''} · moy. ${stats.average.toLocaleString('fr-FR')} kcal/j`
+      : 'Ajoute un repas pour démarrer';
+  }
+  if (target) {
+    if (stats.total >= stats.target) {
+      target.textContent = 'Objectif atteint';
+    } else if (stats.total >= 0) {
+      target.textContent = `Reste ${(stats.target - stats.total).toLocaleString('fr-FR')} kcal`;
+    } else {
+      target.textContent = `${absTotal.toLocaleString('fr-FR')} kcal à compenser`;
+    }
+  }
+}
+
 function updateAll() {
   updateGreeting();
   updateCaloriesRing();
   updateMealList();
   updateDailyNutrition();
   updateOmadCard();
+  updateMealToolsSummary();
+  updateWeeklyDeficit();
   updateActivityMode();
   updateSteps();
   updatePilates();
@@ -3580,6 +3894,8 @@ function updateCaloriesRing() {
   updateCalorieMood(eaten, burned, net, goal);
   updateDailyNutrition();
   updateOmadCard();
+  updateMealToolsSummary();
+  updateWeeklyDeficit();
   if (document.getElementById('cal-grid')) renderCalendar();
 }
 
@@ -4310,6 +4626,7 @@ function loadSettingsUI() {
   document.getElementById('s-age').value = p.age;
   document.getElementById('s-gender').value = p.gender;
   document.getElementById('s-kcal').value = p.kcal;
+  document.getElementById('s-weekly-deficit-goal').value = p.weeklyDeficitGoal || 3500;
   document.getElementById('s-diet').value = p.diet;
   document.getElementById('s-activity').value = p.activity;
   document.getElementById('s-steps-goal').value = p.stepsGoal || 8000;
@@ -4331,6 +4648,7 @@ function saveSettings() {
   state.profile.age = parseInt(document.getElementById('s-age').value) || 27;
   state.profile.gender = document.getElementById('s-gender').value;
   state.profile.kcal = parseInt(document.getElementById('s-kcal').value) || 1500;
+  state.profile.weeklyDeficitGoal = parseInt(document.getElementById('s-weekly-deficit-goal').value) || 3500;
   state.profile.diet = document.getElementById('s-diet').value.trim();
   state.profile.activity = document.getElementById('s-activity').value.trim();
   state.profile.stepsGoal = parseInt(document.getElementById('s-steps-goal').value) || 8000;
@@ -4379,6 +4697,7 @@ function buildSystemPrompt() {
   const omadLine = omadStatus.enabled
     ? `fenêtre ${omadStatus.startLabel}-${omadStatus.endLabel}, actuellement ${omadStatus.unlocked ? 'déverrouillée' : 'verrouillée'}`
     : 'désactivé';
+  const weeklyDeficit = getWeeklyDeficitStats();
 
   return `Tu es un coach minceur bienveillant, motivant et expert en nutrition. Tu parles en français, avec un ton chaleureux, direct et encourageant. Utilise des emojis avec parcimonie (🌱 🎯 💪).
 
@@ -4400,6 +4719,7 @@ AUJOURD'HUI :
 - Pilates : ${todayPilates} min (→ ${todayBurnedPilates} kcal brûlées)
 - TOTAL brûlé : ${todayBurnedTotal} kcal
 - NET : ${todayNet} / ${p.kcal} kcal
+- Déficit hebdo visible : ${weeklyDeficit.total} kcal sur objectif ${weeklyDeficit.target} kcal (${weeklyDeficit.loggedDays} jour(s) renseigné(s))
 
 POIDS (4 dernières pesées hebdo) :
 ${evolution || 'Pas encore de données'}
